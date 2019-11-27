@@ -1,0 +1,202 @@
+<html>
+
+<style>
+{% load static %}
+
+html {
+	overflow-y: scroll; 
+}
+
+body {
+    background-color: rgb(31,36,45)
+}
+.center {
+  display: block;
+  width: auto;
+  max-height: 50%;
+  height:auto;
+  margin-left: 40px;
+}
+
+h1 {
+    font-family: "simplifica";
+    font-weight: bold;
+    font-size: 40px;
+    letter-spacing: 5px;
+}
+
+@font-face {
+  font-family: 'simplifica';
+  src: url({% static 'fonts/simplifica.woff' %}) format('woff'), /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+   url({% static 'fonts/simplifica.ttf' %}) format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+}  
+.redText {
+    color: rgb(184,106,106);
+    position:relative;
+    top:-10px;
+}
+
+.tealText {
+    position:relative;
+    top:-10px;
+    color: rgb(85,179,175);
+}
+
+.button {
+    color: rgb(184,223,221);
+    background-color: transparent;
+    border: 1px solid black;
+    display: inline-block;
+    align-items: center;
+    border-color: rgb(184,223,221);
+    width: 200px;
+    height:45px;
+    margin-top:10px;
+    margin-right: 70px;
+
+
+}
+
+.flex {
+  display: flex;
+  justify-content: left;
+}
+
+.flex-item + .flex-item {
+  margin-left: 40px;
+}
+
+.rightbutton {
+    position: relative;
+    left: 200px;
+}
+
+.menuItem{
+    font-size: 23px;
+    display: block;
+    width: auto;
+    max-height: 50%;
+    height:auto;
+    display: inline-block;
+    align-items: center;
+    top: 4px;
+}
+
+.container {
+  display: grid;
+  margin-top: 50px;
+  justify-content: space-evenly;
+  height:50%;
+  grid-template-columns: 60% 1% 35%;
+  grid-template-rows: 40px 50px 50px 50px 50px 50px 50px;
+}
+
+.block1 {
+  grid-row: 1 / 3;
+  grid-column: 1 / 1;
+}
+
+.block2 {
+  grid-row: 2 / 2;
+  grid-column: 3 / 3;
+}
+
+.block3 {
+  grid-row: 3 / 3;
+  grid-column: 3 / 3;
+}
+
+.block4 {
+  grid-row: 4 / 4;
+  grid-column: 3 / 3;
+}
+
+.block5 {
+ grid-row: 5 / 5;
+  grid-column: 3 / 3;
+}
+
+.block6 {
+ grid-row: 6 / 6;
+  grid-column: 3 / 3;
+}
+
+input {
+  color: rgb(184,223,221);
+    background-color: transparent;
+    border: 1px solid black;
+    display: inline-block;
+    align-items: center;
+    padding-left: 10px;
+    border-color: gray;
+    width: 200px;
+    height:30px;
+    margin-right: 70px;
+    border-radius: 6px;
+
+}
+
+.snap-container {  
+ 
+  /* overflow: scroll;
+  height: 100vh;
+  scroll-snap-type: proximity;
+  scroll-snap-points-y: repeat(100vh);
+  scroll-snap-type: y proximity;  */
+}  
+
+a {
+  text-decoration: none;
+  color: rgb(85,179,175);
+}
+
+
+
+
+
+
+</style>
+
+<div style="height:100%; width:100%">
+<div>
+<div class = "snap-point flex" style="text-align:left"><img src="{% static '/images/logo.png' %}"  class = "center flex-item" style="margin-bottom:25px;height:60px;max-width: 75%">
+<h1 class="flex-item tealText menuItem"><a href="#altData">ALTERNATIVE DATA</a></h1>
+<h1 class="flex-item tealText menuItem"><a href="#consulting">CONSULTING</a></h1>
+<h1 class="flex-item tealText menuItem"><a href="/login">LOG IN</a></h1>
+</div>
+<div class="container">
+<img src="{% static '/images/mockup.png' %}"  class = "block1" style="margin-right: auto; margin-left: auto;max-width: 75%">
+<input placeholder="First Name" class="block2" type="name"required autocomplete="off"/>
+<input placeholder="Last Name" class = "block3" type="name"required autocomplete="off"/>
+  <input placeholder="Email Address" class = "block4" type="email"required autocomplete="off"/>
+  <input placeholder="Password" class = "block5" type="password"required autocomplete="off"/>
+
+    <button class="block6 button">SIGN UP</button>
+    </div>
+<div style="margin-left: 40px; text-align: center">
+<h1 class="redText" style="top: 0px; font-size:30px;margin-top:75px;margin-bottom:20px;text-align:left">unlock the power of big data with</h1>
+<h1 class="tealText" style="top: 0px;margin-top:1px;color:white;text-align: left">THE <span style="color:rgb(85,179,175)">NEXT GENERATION</span> OF INVESTMENT ANALYSIS TOOLS</h1>
+</div>
+</div>
+<br style="height:10px"></br>
+<div style="border-top-style: solid; color:gray;border-top-width:1px">
+<h1 class="tealText snap-point" style="margin-left: 40px;margin-top:20px;color:white"><a name="altData"></a>ALTERNATIVE DATA</h1>
+<div style="text-align:right; margin-right:40px">
+<h1 class="tealText" style="font-size:20px;margin-left: 40px;color:white;margin-bottom:0px">WE SIFT THROUGH BILLIONS OF DATA POINTS TO CREATE</h1>
+<h1 class="tealText" style="margin-left: 40px;margin-top:5px;margin-bottom:0px">HUNDREDS OF ACTIONABLE METRICS</h1>
+<h1 class="redText" style="margin-left: 40px;margin-top:0px;font-size:20px"><span style="color:white">MANY OF WHICH CAN BE</span> FOUND NOWHERE ELSE</h1>
+</div>
+</div>
+<br style="height:10px"></br>
+<div style="border-top-style: solid; color:gray;border-top-width:1px">
+<a name="consultation"></a><h1 class="tealText snap-point" style="text-align:right; margin-right: 40px;margin-top:20px;color:white"><a name="consulting"></a>CONSULTING</h1>
+<div style="text-align:left; margin-left:40px">
+<h1 class="tealText" style="font-size:20px;margin-left: 40px;color:white;margin-bottom:0px">WE SIFT THROUGH BILLIONS OF DATA POINTS TO CREATE</h1>
+<h1 class="tealText" style="margin-left: 40px;margin-top:5px;margin-bottom:0px">HUNDREDS OF ACTIONABLE METRICS</h1>
+<h1 class="redText" style="margin-left: 40px;margin-top:0px;font-size:20px"><span style="color:white">MANY OF WHICH CAN BE</span> FOUND NOWHERE ELSE</h1>
+</div>
+</div>
+<h1 style="height:1000px">SPACE</h1>
+
+</div>
+</html>

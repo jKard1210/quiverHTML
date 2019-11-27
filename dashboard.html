@@ -1,6 +1,7 @@
 <html>
 
 <style>
+{% load static %}
 body {
     background-color: rgb(31,36,45)
 }
@@ -20,8 +21,8 @@ h1 {
 
 @font-face {
   font-family: 'simplifica';
-  src: url('simplifica.woff') format('woff'), /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-   url('simplifica.ttf') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+  src: url('{% static 'fonts/simplifica.woff' %}') format('woff'), /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+   url('{% static 'fonts/simplifica.ttf' %}') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
 }  
 .redText {
     color: rgb(184,106,106)
@@ -47,9 +48,10 @@ h1 {
 
 }
 </style>
-<img src="logo.png" class = "center" style="max-width: 75%">
+{% load static %} 
+<img src="{% static '/images/logo.png' %}" class = "center" style="max-width: 75%">
 <h1 class="tealText">ALTERNATIVE DATA</h1>
-<h1 class="redText">CONSULTATION</h1>
+<h1 class="redText">CONSUdfsdfsdfsLTATION</h1>
 <div>
 <button class="button">ALTERNATIVE DATA</button>
 <button class="button">CONSULTATION</button>
