@@ -57,10 +57,6 @@ h1 {
 
 }
 
-form {
-margin-top:75px;
-}
-
 .flex {
   display: flex;
   justify-content: left;
@@ -88,7 +84,7 @@ margin-top:75px;
 
 .container {
   display: grid;
-  margin-top: 30px;
+  margin-top: 50px;
   justify-content: space-evenly;
   height:50%;
   grid-template-columns: 60% 1% 35%;
@@ -170,15 +166,13 @@ a {
 </div>
 <div class="container">
 <img src="{% static '/images/mockup.png' %}"  class = "block1" style="margin-right: auto; margin-left: auto;max-width: 75%">
-<form action="/register/" method="post">
-    {% csrf_token %}
-    <input autofocus id="id_username" maxlength="150" name="username" required type="text" placeholder="username">
-    <input type="password" name="password1" required id="id_password1" placeholder="password">
-    <input type="password" name="password2" required id="id_password2" placeholder="confirm password">
-    <button type="submit" class="button">SIGN UP</button>
-{% if error == "TRUE" %}
-<h1 class="redText" style="font-size:10px;margin-top:20px; width:250px">ERROR: INVALID USERNAME OR PASSWORD</h1>
-{% endif %}
+<form>
+<input placeholder="First Name" class="block2" type="name"required autocomplete="off"/>
+<input placeholder="Last Name" class = "block3" type="name"required autocomplete="off"/>
+  <input placeholder="Email Address" class = "block4" type="email"required autocomplete="off"/>
+  <input placeholder="Password" class = "block5" type="password"required autocomplete="off"/>
+
+    <button class="block6 button">SIGN UP</button>
 </form>    
 </div>
 <div style="margin-left: 40px; text-align: center">

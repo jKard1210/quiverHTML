@@ -18,6 +18,9 @@ body {
   margin-left: 40px;
 }
 
+.metric {
+  margin-left:60px;
+}
 h1 {
     font-family: "simplifica";
     font-weight: bold;
@@ -42,6 +45,15 @@ h1 {
     color: rgb(85,179,175);
 }
 
+.tealMetrics {
+    position: relative;
+    top: -10px;
+    margin-bottom: 0px;
+    margin-top:10px;
+    color: rgb(85,179,175);
+    font-size: 20px;
+    letter-spacing: 2px;
+}
 .button {
     color: rgb(184,223,221);
     background-color: transparent;
@@ -169,15 +181,17 @@ a {
 <h1 class="flex-item tealText menuItem"><a href="/profile">{{ user.get_username }}</a></h1>
 <h1 style="" class="flex-item tealText menuItem"><a href="/logout">log out</a></h1>
 </div>
-<div style="align:center">
-<form style="margin-left:80px;margin-top:200px" onsubmit="get_action(this);">
-<input style="" type="text" placeholder="Enter Ticker" id = "ticker"></input>
-<button class="button" style="height:40px;border-radius:5px;margin-top: 30px" type="submit">Search</button>
+<h1 style="color:white; margin-left:30px;text-align:center">{{ ticker }}</h1>
+<div style="align:center;width:50%">
+<h1 class="tealMetrics metric" style="color:rgb(133,180,255)">Political Beta</h1>
+<h1 class="tealMetrics metric" style="color:gray">correlation between daily price changes and presidential candidate general election betting odds</h1>
+<h1 class="tealMetrics metric" style="margin-top:0px;color:gray">calculated using PredictIt data since June 2019</h1>
+{% for candidate in predictit %}
+<h1 class="tealMetrics metric">Biden: {{candidate.0|floatformat:3}}</h1>
+<h1 class="tealMetrics metric">Sanders: {{candidate.1|floatformat:3}}</h1>
+<h1 class="tealMetrics metric">Trump: {{candidate.2|floatformat:3}}</h1>
+<h1 class="tealMetrics metric">Warren: {{candidate.3|floatformat:3}}</h1>
+{% endfor %}
 </div>
 </html>
 
-<script type="text/javascript">
-function get_action(form) {
-form.action = 'https://www.quiverquant.com/dashboard/'+document.getElementById("ticker").value;
-}
-</script>
