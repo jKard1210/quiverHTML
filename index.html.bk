@@ -10,28 +10,6 @@ html {
 body {
     background-color: rgb(31,36,45)
 }
-
-.grid-container {
-  display: grid;
-  grid-template-columns: auto;
-  background-color: rgb(31,36,45);
-  text-align: left;
-  color:rgb(184,223,221);
-  padding: 10px;
-  margin-bottom: 50px;
-}
-.grid-item {
-  background-color: rgb(31,36,45);
-  font-family: 'simplifica';
-  padding: 20px;
-  letter-spacing: 3px;
-  color:white;
-  text-align: left;
-  font-size: 35px;
-  margin-bottom:40px;
-  float:left;
-}
-
 .center {
   display: block;
   width: auto;
@@ -49,8 +27,8 @@ h1 {
 
 @font-face {
   font-family: 'simplifica';
-  src: url(/static/fonts/simplifica.woff) format('woff'), /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-   url(/static/fonts/simplifica.ttf) format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+  src: url({% static 'fonts/simplifica.woff' %}) format('woff'), /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+   url({% static 'fonts/simplifica.ttf' %}) format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
 }  
 .redText {
     color: rgb(184,106,106);
@@ -185,29 +163,23 @@ a {
 
 <div style="height:100%; width:100%">
 <div>
-<div class = "snap-point flex" style="text-align:left"><img src="/static/images/logo.png"  class = "center flex-item" style="margin-bottom:25px;height:60px;max-width: 75%">
+<div class = "snap-point flex" style="text-align:left"><img src="{% static '/images/logo.png' %}"  class = "center flex-item" style="margin-bottom:25px;height:60px;max-width: 75%">
 <h1 class="flex-item tealText menuItem"><a href="#altData">ALTERNATIVE DATA</a></h1>
 <h1 class="flex-item tealText menuItem"><a href="#consulting">CONSULTING</a></h1>
 <h1 class="flex-item tealText menuItem"><a href="/login">LOG IN</a></h1>
 </div>
 <div class="container">
-<img src="/static/images/mockup.png"  class = "block1" style="margin-right: auto; margin-left: auto;max-width: 75%">
+<img src="{% static '/images/mockup.png' %}"  class = "block1" style="margin-right: auto; margin-left: auto;max-width: 75%">
 <form action="/register/" method="post">
     {% csrf_token %}
     <input autofocus id="id_username" maxlength="150" name="username" required type="text" placeholder="username">
     <input type="password" name="password1" required id="id_password1" placeholder="password">
     <input type="password" name="password2" required id="id_password2" placeholder="confirm password">
     <button type="submit" class="button">SIGN UP</button>
- {% if error == "TRUE" %} 
+{% if error == "TRUE" %}
 <h1 class="redText" style="font-size:10px;margin-top:20px; width:250px">ERROR: INVALID USERNAME OR PASSWORD</h1>
 {% endif %}
-
-
-
-</form>
-
-
-    
+</form>    
 </div>
 <div style="margin-left: 40px; text-align: center">
 <h1 class="redText" style="top: 0px; font-size:30px;margin-top:75px;margin-bottom:20px;text-align:left">unlock the power of big data with</h1>
@@ -217,24 +189,22 @@ a {
 <br style="height:10px"></br>
 <div style="border-top-style: solid; color:gray;border-top-width:1px">
 <h1 class="tealText snap-point" style="margin-left: 40px;margin-top:20px;color:white"><a name="altData"></a>ALTERNATIVE DATA</h1>
-<img src="static/images/sourceLogos.png" style="margin-left:auto; margin-right:auto;display:block;height:400px"></img>
 <div style="text-align:right; margin-right:40px">
 <h1 class="tealText" style="font-size:20px;margin-left: 40px;color:white;margin-bottom:0px">WE SIFT THROUGH BILLIONS OF DATA POINTS TO CREATE</h1>
-<h1 class="tealText" style="margin-left: 40px;margin-top:5px;margin-bottom:0px">DOZENS OF ACTIONABLE METRICS</h1>
+<h1 class="tealText" style="margin-left: 40px;margin-top:5px;margin-bottom:0px">HUNDREDS OF ACTIONABLE METRICS</h1>
+<h1 class="redText" style="margin-left: 40px;margin-top:0px;font-size:20px"><span style="color:white">MANY OF WHICH CAN BE</span> FOUND NOWHERE ELSE</h1>
 </div>
 </div>
 <br style="height:10px"></br>
 <div style="border-top-style: solid; color:gray;border-top-width:1px">
 <a name="consultation"></a><h1 class="tealText snap-point" style="text-align:right; margin-right: 40px;margin-top:20px;color:white"><a name="consulting"></a>CONSULTING</h1>
-  <h1 class="tealText" style="color:white">Advanced Predictive Modeling</h1>  
-<h1 class="tealText" style="color:white">Company and Industry Specific Metrics</h1>  
-  <h1 class="tealText" style="color:white">Customized Alternative Data Reports</h1>
-<div style="text-align:left; margin-right:40px">
-<h1 class="tealText" style="margin-left: 0px;margin-top:110px;text-align:right;float: right;">PERSONALIZED AND PROPRIETARY DATA ANALYTICS</h1>
-<a href="mailto:james@quiverquant.com"><button class="button" style="margin-bottom:40px;float: right" href="mailto:james@quiverquant.com">Schedule a Consultation</button>
-</a>
+<div style="text-align:left; margin-left:40px">
+<h1 class="tealText" style="font-size:20px;margin-left: 40px;color:white;margin-bottom:0px"></h1>
+<h1 class="tealText" style="margin-left: 0px;margin-top:5px;margin-bottom:0px">PERSONALIZED AND PROPRIETARY DATA ANALYTICS</h1>
+<h1 class="redText" style="margin-left: 40px;margin-top:0px;font-size:20px"><span style="color:white"></span></h1>
 </div>
 </div>
+<h1 style="height:1000px">SPACE</h1>
 
 </div>
 </html>
