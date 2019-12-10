@@ -2,11 +2,9 @@
 
 <style>
 {% load static %}
-
 html {
 	overflow-y: scroll; 
 }
-
 body {
     background-color: rgb(31,36,45)
 }
@@ -18,16 +16,38 @@ body {
   margin-left: 40px;
 }
 
-.metric {
-  margin-left:60px;
+.collapsible {
+  margin-left: 80px;
+  margin-right: 40px;
+  cursor: pointer;
+  padding: 18px;
+  border: none;
+  text-align: center;
+  outline: none;
+  font-size: 15px;
 }
+
+.active, .button:hover {
+  color: #ccc;
+}
+
+.tempHidden {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+}
+
+.is-open, .tempHidden {
+  display:none;
+}
+
+
 h1 {
     font-family: "simplifica";
     font-weight: bold;
     font-size: 40px;
     letter-spacing: 5px;
 }
-
 @font-face {
   font-family: 'simplifica';
   src: url({% static 'fonts/simplifica.woff' %}) format('woff'), /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
@@ -39,54 +59,41 @@ h1 {
     top:-10px;
 }
 
-.tealText {
-    position:relative;
-    top:-10px;
-    color: rgb(85,179,175);
-}
-
 .tealMetrics {
-    position: relative;
-    top: -10px;
     margin-bottom: 0px;
     margin-top:10px;
-    color: rgb(85,179,175);
     font-size: 20px;
     letter-spacing: 2px;
+    margin-left:60px;
 }
 .button {
     color: rgb(184,223,221);
     background-color: transparent;
-    border: 1px solid black;
+    border: 0px solid black;
     display: block;
-    align-items: center;
+    align-items: right;
+    text-align: right;
     border-color: rgb(184,223,221);
-    width: 275px;
-    height:60px;
-    font-size: 20px;
-    margin-top:30px;
-    margin: auto;
-
+    width: 85%;
+    height:40px;
+    margin-left:20px;
+    font-size: 15px;
+    margin-top:0px;
 }
-
 form {
 margin-top:75px;
 }
-
 .flex {
   display: flex;
   justify-content: left;
 }
-
 .flex-item + .flex-item {
   margin-left: 40px;
 }
-
 .rightbutton {
     position: relative;
     left: 200px;
 }
-
 .menuItem{
     font-size: 23px;
     display: block;
@@ -97,7 +104,6 @@ margin-top:75px;
     align-items: center;
     top: 4px;
 }
-
 .container {
   display: grid;
   margin-top: 50px;
@@ -106,37 +112,30 @@ margin-top:75px;
   grid-template-columns: 60% 1% 35%;
   grid-template-rows: 40px 50px 50px 50px 50px 50px 50px;
 }
-
 .block1 {
   grid-row: 1 / 3;
   grid-column: 1 / 1;
 }
-
 .block2 {
   grid-row: 2 / 2;
   grid-column: 3 / 3;
 }
-
 .block3 {
   grid-row: 3 / 3;
   grid-column: 3 / 3;
 }
-
 .block4 {
   grid-row: 4 / 4;
   grid-column: 3 / 3;
 }
-
 .block5 {
  grid-row: 5 / 5;
   grid-column: 3 / 3;
 }
-
 .block6 {
  grid-row: 6 / 6;
   grid-column: 3 / 3;
 }
-
 input {
   color: rgb(184,223,221);
     background-color: transparent;
@@ -154,7 +153,6 @@ input {
     margin-bottom: 15px;
     margin: auto;
 }
-
 .snap-container {  
  
   /* overflow: scroll;
@@ -163,35 +161,147 @@ input {
   scroll-snap-points-y: repeat(100vh);
   scroll-snap-type: y proximity;  */
 }  
-
 a {
   text-decoration: none;
   color: rgb(85,179,175);
 }
 
+h1 {
+  position:relative;
+  top:-10px;
+  color: rgb(85,179,175);
+}
 
+table{
+  table-layout: fixed;
+}
+.tbl-header{
+  background-color: rgba(255,255,255,0.3);
+ }
+.tbl-content{
+  height:300px;
+  overflow-x:auto;
+  margin-top: 0px;
+  border: 1px solid rgba(255,255,255,0.3);
+}
+th{
+  padding: 20px 15px;
+  text-align: left;
+  font-weight: 500;
+  font-size: 12px;
+  color: #fff;
+  font-family: 'simplifica';
+  background-color: transparent;
+  text-transform: uppercase;
+  font-size: 20px;
+  letter-spacing:2px;
 
-
-
+}
+td{
+  padding: 15px;
+  vertical-align:middle;
+  font-weight: 300;
+  font-size: 12px;
+  color: #fff;
+  border-bottom: solid 1px rgba(255,255,255,0.1);
+}
 
 </style>
 
-<div style="height:100%; width:100%">
-<div class = "snap-point flex" style="text-align:left"><img src="{% static '/images/logo.png' %}"  class = "center flex-item" style="margin-bottom:25px;height:60px;max-width: 75%">
+<div style="height:200%; width:100%">
+<div class = "snap-point flex" style="text-align:left"><a href=".."><img src="{% static '/images/logo.png' %}"  class = "center flex-item" style="margin-bottom:25px;height:60px;max-width: 75%"></a>
 <h1 class="flex-item tealText menuItem"><a href="/profile">{{ user.get_username }}</a></h1>
-<h1 style="" class="flex-item tealText menuItem"><a href="/logout">log out</a></h1>
+<h1 class="flex-item tealText menuItem"><a href="/logout">log out</a></h1>
 </div>
 <h1 style="color:white; margin-left:30px;text-align:center">{{ ticker }}</h1>
-<div style="align:center;width:50%">
-<h1 class="tealMetrics metric" style="color:rgb(133,180,255)">Political Beta</h1>
-<h1 class="tealMetrics metric" style="color:gray">correlation between daily price changes and presidential candidate general election betting odds</h1>
-<h1 class="tealMetrics metric" style="margin-top:0px;color:gray">calculated using PredictIt data since June 2019</h1>
+{% if predictit|length > 0 %}
+<div style="margin-top: 15px;width:50%;float:left">
+<h1 class="tealMetrics" style="color:rgb(133,180,255)">Political Beta</h1>
+<h1 class="tealMetrics" style="color:gray">correlation between daily price changes and presidential candidate general election betting odds</h1>
+<h1 class="tealMetrics" style="margin-top:0px;color:gray">calculated using PredictIt data since June 2019</h1>
 {% for candidate in predictit %}
-<h1 class="tealMetrics metric">Biden: {{candidate.0|floatformat:3}}</h1>
-<h1 class="tealMetrics metric">Sanders: {{candidate.1|floatformat:3}}</h1>
-<h1 class="tealMetrics metric">Trump: {{candidate.2|floatformat:3}}</h1>
-<h1 class="tealMetrics metric">Warren: {{candidate.3|floatformat:3}}</h1>
+<h1 class="tealMetrics">Biden: {{candidate.0|floatformat:3}}</h1>
+<h1 class="tealMetrics">Sanders: {{candidate.1|floatformat:3}}</h1>
+<h1 class="tealMetrics">Trump: {{candidate.2|floatformat:3}}</h1>
+<h1 class="tealMetrics">Warren: {{candidate.3|floatformat:3}}</h1>
 {% endfor %}
+</div>
+{% endif %}
+{% if glassdoor|length > 0 %}
+<div style="float:right; margin-top: 15px;width:50%">
+<h1 class="tealMetrics" style="color:rgb(133,180,255)">Glassdoor</h1>
+<h1 class="tealMetrics" style="color:gray">employee reviews from company Glassdoor page</h1>  
+<table class="pure-table pure-table-horizontal" style="border-width:1;margin-left:100px">
+    <tbody>
+<tr>
+        <th style = "text-align:right;">Month</th>
+        <th style = "text-align:right;">Review Count</th>
+        <th style = "text-align:right;">Average Stars</th>
+      </tr>
+      {% for info in glassdoor %}
+      {% if info.0.year > 2018 and info.0.month > 9 %}
+      <tr>
+        <td style="text-align:right;color: rgb(85,179,175);">{{info.0.month}}/{{info.0.year}}</td>
+        <td style="text-align:center;color: rgb(85,179,175);">{{info.1}}</td>
+        <td style="text-align:right;color: rgb(85,179,175);">{{info.2|floatformat:2}}</td>
+      </tr>
+      {% endif %}
+      {% endfor %}
+      {% for info in glassdoor %}
+      {% if info.0.year < 2019 or info.0.month < 10 %}
+      
+	<tr class="hiddenGlassdoor" style="display:none"> <td style="text-align:right;color: rgb(85,179,175);">{{info.0.month}}/{{info.0.year}}</td>
+<td style="text-align:center;color: rgb(85,179,175);">{{info.1}}</td>
+<td style="text-align:right;color: rgb(85,179,175);">{{info.2|floatformat:2}}</td>
+</tr>
+      {% endif %}
+      {% endfor %}
+ </tbody>
+      </table>
+<button type="button" style="border-width:0px" class="button buttonQuarterly">Switch to Quarterly</button>
+<button type="button" style="border-width:0px" class="button buttonGlassdoor">Expand</button>
+</div>
+{% endif %}
+{% if patents|length > 0 %}
+<div style="margin-top: 15px;width:50%;float:left">
+<h1 class="tealMetrics" style="color:rgb(133,180,255)">Patent Trends</h1>
+<h1 class="tealMetrics" style="color:gray">For more details on these metrics, see (FILL LINK IN LATER)</h1>
+{% for row in patents %}
+<h1 class="tealMetrics"> Tech Momentum: {{row.0|floatformat:2}} </h1>
+<h1 class="tealMetrics"> Patent Drift: {{row.1|floatformat:3}} </h1>
+{% endfor %}
+</div>
+{% endif %}
+<div style="margin-top: 15px;width:50%;float:right">
+<h1 class="tealMetrics" style="color:rgb(133,180,255)">Web Traffic</h1>
+</div>
 </div>
 </html>
 
+
+<script> 
+var coll = document.getElementsByClassName("buttonGlassdoor"); 
+var i; 
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+	if(this.innerHTML == "Expand") {
+		this.innerHTML = "Hide"
+	} else {
+		this.innerHTML = "Expand"
+	}
+    this.classList.toggle("active");
+    var hidden = document.getElementsByClassName("hiddenGlassdoor")
+    for (j = 0; j < hidden.length; j++) {
+	if(hidden[j].style.display == "none") {
+        hidden[j].style.display =  "table-row";
+	} else {
+		hidden[j].style.display = "none";
+	}    
+}
+
+
+
+
+  });
+}
+</script>
