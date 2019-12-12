@@ -204,7 +204,7 @@ td{
 </div>
 <h1 style="color:white; margin-left:30px;text-align:center">{{ ticker }}</h1>
 {% if predictit|length > 0 %}
-<div style="margin-top: 15px;width:50%;float:left">
+<div style="margin-top: 10px;margin-bottom:50px;width:50%;float:left">
 <h1 class="tealMetrics" style="color:rgb(133,180,255)">Political Beta</h1>
 <h1 class="tealMetrics" style="color:gray">correlation between daily price changes and presidential candidate general election betting odds</h1>
 <h1 class="tealMetrics" style="margin-top:0px;color:gray">calculated using PredictIt data since June 2019</h1>
@@ -216,12 +216,43 @@ td{
 {% endfor %}
 </div>
 {% endif %}
-<h1 class="tealMetrics" style="color:rgb(133,180,255)">MAUDE Reports{{maudeName}}</h1>
-{% for info in maude %}
-<h1 class="tealMetrics">{{info}}</h1>
-{% endfor %}
+{% if maude|length > 0 %}
+<div style="float:right; margin-bottom:10px;margin-top: 10px;width:50%">
+  <h1 class="tealMetrics" style="color:rgb(133,180,255)">MAUDE Reports</h1>
+  <h1 class="tealMetrics" style="color:gray">FDA medical device adverse event reports</h1>  
+  <table class="pure-table pure-table-horizontal" style="border-width:1;margin-left:100px">
+      <tbody>
+  <tr>
+          <th style = "text-align:right;" id = "period3">Month</th>
+	<th style = "text-align:right;">Injuries</th>
+	<th style = "text-align:right;">Deaths</th>
+          <th style = "text-align:right;">Total Adverse Events</th>
+        </tr>
+        {% for info in maude %}
+	{% if info.0.month > 9 and info.0.year > 2018  %}
+	 <tr class="hiddenQuarterly3">
+          <td style="text-align:right;color: rgb(85,179,175);">{{info.0.month}}/{{info.0.year}}</td>
+          <td style="text-align:center;color: rgb(85,179,175);">{{info.1|floatformat:"0"}}</td>
+	<td style="text-align:center;color: rgb(85,179,175);">{{info.2|floatformat:"0"}}</td>
+	<td style="text-align:center;color: rgb(85,179,175);">{{info.3|floatformat:"0"}}</td>
+        </tr>
+	{% endif %}
+	{% if info.0.month < 10 or info.0.year < 2019  %}
+	<tr class="hiddenMAUDE" style="display:none">
+		<td style="text-align:right;color: rgb(85,179,175);">{{info.0.month}}/{{info.0.year}}</td>
+		<td style="text-align:center;color: rgb(85,179,175);">{{info.1|floatformat:"0"}}</td>
+		<td style="text-align:center;color: rgb(85,179,175);">{{info.2|floatformat:"0"}}</td>
+		<td style="text-align:center;color: rgb(85,179,175);">{{info.3|floatformat:"0"}}</td>
+	</tr>
+	{% endif %}
+        {% endfor %}
+   </tbody>
+        </table>
+  <button type="button" style="border-width:0px" class="button buttonMAUDE" id ="expandMAUDE">Expand</button>
+  </div>
+  {% endif %}
 {% if glassdoor|length > 0 %}
-<div style="float:right; margin-top: 15px;width:50%">
+<div style="float:right; margin-top: 10px;margin-bottom:50px;width:50%">
 <h1 class="tealMetrics" style="color:rgb(133,180,255)">Glassdoor</h1>
 <h1 class="tealMetrics" style="color:gray">employee reviews from company Glassdoor page</h1>  
 <table class="pure-table pure-table-horizontal" style="border-width:1;margin-left:100px">
@@ -337,8 +368,6 @@ for (i = 0; i < quar.length; i++) {
 }
 });
 }
-
-
 var coll = document.getElementsByClassName("buttonGlassdoor"); 
 var quarterlyButton = document.getElementById("quarterlyButton");
 var i; 
@@ -362,8 +391,7 @@ for (i = 0; i < coll.length; i++) {
 }
   });
 }
-
-var coll2 = document.getElementsByClassName("buttonTraffic"); 
+var coll2 = document.getElementsByClassName("buttonMAUDE"); 
 var i; 
 for (i = 0; i < coll2.length; i++) {
   coll2[i].addEventListener("click", function() {
@@ -373,7 +401,7 @@ for (i = 0; i < coll2.length; i++) {
 		this.innerHTML = "Expand"
 	}
     this.classList.toggle("active");
-    var hidden = document.getElementsByClassName("hiddenTraffic")
+    var hidden = document.getElementsByClassName("hiddenMAUDE")
     for (j = 0; j < hidden.length; j++) {
 	if(hidden[j].style.display == "none") {
         hidden[j].style.display =  "table-row";

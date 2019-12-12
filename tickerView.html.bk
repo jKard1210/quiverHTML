@@ -15,7 +15,6 @@ body {
   height:auto;
   margin-left: 40px;
 }
-
 .collapsible {
   margin-left: 80px;
   margin-right: 40px;
@@ -26,22 +25,17 @@ body {
   outline: none;
   font-size: 15px;
 }
-
 .active, .button:hover {
   color: #ccc;
 }
-
 .tempHidden {
   padding: 0 18px;
   display: none;
   overflow: hidden;
 }
-
 .is-open, .tempHidden {
   display:none;
 }
-
-
 h1 {
     font-family: "simplifica";
     font-weight: bold;
@@ -58,7 +52,6 @@ h1 {
     position:relative;
     top:-10px;
 }
-
 .tealMetrics {
     margin-bottom: 0px;
     margin-top:10px;
@@ -165,13 +158,11 @@ a {
   text-decoration: none;
   color: rgb(85,179,175);
 }
-
 h1 {
   position:relative;
   top:-10px;
   color: rgb(85,179,175);
 }
-
 table{
   table-layout: fixed;
 }
@@ -195,7 +186,6 @@ th{
   text-transform: uppercase;
   font-size: 20px;
   letter-spacing:2px;
-
 }
 td{
   padding: 15px;
@@ -205,7 +195,6 @@ td{
   color: #fff;
   border-bottom: solid 1px rgba(255,255,255,0.1);
 }
-
 </style>
 
 <div style="height:200%; width:100%">
@@ -227,6 +216,10 @@ td{
 {% endfor %}
 </div>
 {% endif %}
+<h1 class="tealMetrics" style="color:rgb(133,180,255)">MAUDE Reports{{maudeName}}</h1>
+{% for info in maude %}
+<h1 class="tealMetrics">{{info}}</h1>
+{% endfor %}
 {% if glassdoor|length > 0 %}
 <div style="float:right; margin-top: 15px;width:50%">
 <h1 class="tealMetrics" style="color:rgb(133,180,255)">Glassdoor</h1>
@@ -234,13 +227,13 @@ td{
 <table class="pure-table pure-table-horizontal" style="border-width:1;margin-left:100px">
     <tbody>
 <tr>
-        <th style = "text-align:right;">Month</th>
+        <th style = "text-align:right;" id = "period">Month</th>
         <th style = "text-align:right;">Review Count</th>
         <th style = "text-align:right;">Average Stars</th>
       </tr>
       {% for info in glassdoor %}
       {% if info.0.year > 2018 and info.0.month > 9 %}
-      <tr>
+      <tr class="hiddenQuarterly">
         <td style="text-align:right;color: rgb(85,179,175);">{{info.0.month}}/{{info.0.year}}</td>
         <td style="text-align:center;color: rgb(85,179,175);">{{info.1}}</td>
         <td style="text-align:right;color: rgb(85,179,175);">{{info.2|floatformat:2}}</td>
@@ -256,38 +249,107 @@ td{
 </tr>
       {% endif %}
       {% endfor %}
+      {% for info in glassdoorQuarterly %}      
+	    <tr class="hiddenQuarterly" style="display:none"> <td style="text-align:right;color: rgb(85,179,175);">{{info.0.month}}/{{info.0.year}}</td>
+      <td style="text-align:center;color: rgb(85,179,175);">{{info.1}}</td>
+      <td style="text-align:right;color: rgb(85,179,175);">{{info.2|floatformat:2}}</td>
+      </tr>
+      {% endfor %}
  </tbody>
       </table>
-<button type="button" style="border-width:0px" class="button buttonQuarterly">Switch to Quarterly</button>
-<button type="button" style="border-width:0px" class="button buttonGlassdoor">Expand</button>
+<button type="button" style="border-width:0px" class="button buttonQuarterly" id = "quarterlyButton">Switch to Quarterly</button>
+<button type="button" style="border-width:0px" class="button buttonGlassdoor" id ="expandButton">Expand</button>
 </div>
 {% endif %}
 {% if patents|length > 0 %}
 <div style="margin-top: 15px;width:50%;float:left">
 <h1 class="tealMetrics" style="color:rgb(133,180,255)">Patent Trends</h1>
-<h1 class="tealMetrics" style="color:gray">For more details on these metrics, see (FILL LINK IN LATER)</h1>
+<h1 class="tealMetrics" style="color:gray"></h1>
 {% for row in patents %}
 <h1 class="tealMetrics"> Tech Momentum: {{row.0|floatformat:2}} </h1>
 <h1 class="tealMetrics"> Patent Drift: {{row.1|floatformat:3}} </h1>
 {% endfor %}
 </div>
 {% endif %}
+
+{% if traffic|length > 0 %}
 <div style="margin-top: 15px;width:50%;float:right">
 <h1 class="tealMetrics" style="color:rgb(133,180,255)">Web Traffic</h1>
+<h1 class="tealMetrics" style="color:gray">Company's website traffic ranking</h1>  
+<table class="pure-table pure-table-horizontal" style="margin-left:auto;margin-right:40px">
+    <tbody>
+<tr>
+        <th style = "text-align:right;">Month</th>
+        <th style = "text-align:right;">Rank</th>
+      </tr>
+      {% for info in traffic %}
+      {% if info.0.year > 2018 and info.0.month > 9 %}
+      <tr class="hiddenQuarterly2">
+        <td style="text-align:right;color: rgb(85,179,175);">{{info.0.month}}/{{info.0.year}}</td>
+        <td style="text-align:center;color: rgb(85,179,175);">{{info.1}}</td>
+      </tr>
+      {% endif %}
+      {% endfor %}
+      {% for info in traffic %}
+      {% if info.0.year < 2019 or info.0.month < 10 %}
+      
+	<tr class="hiddenTraffic" style="display:none"> <td style="text-align:right;color: rgb(85,179,175);">{{info.0.month}}/{{info.0.year}}</td>
+<td style="text-align:center;color: rgb(85,179,175);">{{info.1}}</td>
+</tr>
+      {% endif %}
+      {% endfor %}
+ </tbody>
+      </table>
+<button type="button" style="border-width:0px" class="button buttonTraffic" id ="expandButton2">Expand</button>
 </div>
+</div>
+{% endif %}
 </div>
 </html>
 
 
 <script> 
+var quar = document.getElementsByClassName("buttonQuarterly"); 
+var i;
+var expandButton = document.getElementById("expandButton"); 
+for (i = 0; i < quar.length; i++) {
+  quar[i].addEventListener("click", function() {
+	if(this.innerHTML == "Switch to Quarterly") {
+		this.innerHTML = "Switch to Monthly"
+		expandButton.innerHTML = ""
+	} else {
+		this.innerHTML = "Switch to Quarterly"
+		expandButton.innerHTML = "Expand"
+	}
+   if(document.getElementById("period").innerHTML == "Month") {
+    document.getElementById("period").innerHTML = "Quarter"
+   } else {
+    document.getElementById("period").innerHTML = "Month"
+   }
+    this.classList.toggle("active");
+    var hidden = document.getElementsByClassName("hiddenQuarterly")
+    for (j = 0; j < hidden.length; j++) {
+	if(hidden[j].style.display == "none") {
+        hidden[j].style.display =  "table-row";
+	} else {
+		hidden[j].style.display = "none";
+	}    
+}
+});
+}
+
+
 var coll = document.getElementsByClassName("buttonGlassdoor"); 
+var quarterlyButton = document.getElementById("quarterlyButton");
 var i; 
 for (i = 0; i < coll.length; i++) {
   coll[i].addEventListener("click", function() {
 	if(this.innerHTML == "Expand") {
 		this.innerHTML = "Hide"
+		quarterlyButton.innerHTML = ""
 	} else {
 		this.innerHTML = "Expand"
+		quarterlyButton.innerHTML = "Switch to Quarterly"
 	}
     this.classList.toggle("active");
     var hidden = document.getElementsByClassName("hiddenGlassdoor")
@@ -298,10 +360,27 @@ for (i = 0; i < coll.length; i++) {
 		hidden[j].style.display = "none";
 	}    
 }
+  });
+}
 
-
-
-
+var coll2 = document.getElementsByClassName("buttonTraffic"); 
+var i; 
+for (i = 0; i < coll2.length; i++) {
+  coll2[i].addEventListener("click", function() {
+	if(this.innerHTML == "Expand") {
+		this.innerHTML = "Hide"
+	} else {
+		this.innerHTML = "Expand"
+	}
+    this.classList.toggle("active");
+    var hidden = document.getElementsByClassName("hiddenTraffic")
+    for (j = 0; j < hidden.length; j++) {
+	if(hidden[j].style.display == "none") {
+        hidden[j].style.display =  "table-row";
+	} else {
+		hidden[j].style.display = "none";
+	}    
+}
   });
 }
 </script>
