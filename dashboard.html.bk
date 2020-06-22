@@ -24,15 +24,14 @@ outline:0
 }
 
 body {
-    background-color: rgb(31,36,45);
-    margin-left:20px;
+    background-color: rgb(31,36,45)
 }
 .center {
   display: block;
   width: auto;
   max-height: 50%;
   height:auto;
-  margin-left: 50px;
+  margin-left: 40px;
 }
 
 h1 {
@@ -49,7 +48,7 @@ h1 {
 }  
 
 .tableElement {
-	margin-top:17px;
+	margin-top:20px;
 	width:100%;
 	height:100%;
 	color:#DCE1D7
@@ -63,13 +62,12 @@ h1 {
 }
 
 .tealText {
-    font-family: avenir next;
+    font-family: "simplifica";
     font-weight: bold;
     font-size:25px;
     letter-spacing:5px;
     position:relative;
-    color: rgba(120,172,255,1);
-
+    color: rgb(85,179,175);
 }
 
 .sourceRow{
@@ -112,7 +110,7 @@ margin-top:75px;
 }
 
 .menuItem{
-    font-size: 21px;
+    font-size: 23px;
     display: block;
     width: auto;
     max-height: 50%;
@@ -120,44 +118,46 @@ margin-top:75px;
     margin-left:40px;
     display: inline-block;
     align-items: center;
-    top:3px;
+    top: 4px;
 }
 
 .container {
   display: grid;
+  margin-top: 50px;
   justify-content: space-evenly;
-  grid-template-columns: 35% 60%;
-  grid-template-rows: 250px 250px 250px 250px;
+  height:50%;
+  grid-template-columns: 60% 1% 35%;
+  grid-template-rows: 40px 50px 50px 50px 50px 50px 50px;
 }
 
 .block1 {
-  grid-row: 5 / 7;
-  grid-column: 2;
+  grid-row: 1 / 3;
+  grid-column: 1 / 1;
 }
 
 .block2 {
-  grid-row: 1;
-  grid-column: 1;
+  grid-row: 2 / 2;
+  grid-column: 3 / 3;
 }
 
 .block3 {
-  grid-row: 2;
-  grid-column: 1;
+  grid-row: 3 / 3;
+  grid-column: 3 / 3;
 }
 
 .block4 {
-  grid-row: 1;
-  grid-column: 2;
+  grid-row: 4 / 4;
+  grid-column: 3 / 3;
 }
 
 .block5 {
- grid-row: 3 / 5;
-  grid-column: 1;
+ grid-row: 5 / 5;
+  grid-column: 3 / 3;
 }
 
 .block6 {
- grid-row: 3;
-  grid-column: 2;
+ grid-row: 6 / 6;
+  grid-column: 3 / 3;
 }
 
 input {
@@ -189,7 +189,7 @@ input {
 
 a {
   text-decoration: none;
-  color:rgba(120,172,255,1);
+  color: rgb(85,179,175);
 }
 
 span.msg,
@@ -202,7 +202,7 @@ span.choose {
 .dropdown {
   width: 275px;
   height:60px;
-  background-color: transparent;
+  background-color: rgb(31,36,45);
   border-radius: 5px;
   border:1px solid gray;
   transition: all .5s ease;
@@ -227,12 +227,12 @@ span.choose {
 .dropdown:hover {
 }
 .dropdown:active {
-    background-color: transparent;
+    background-color: rgb(31,36,45)
 }
 .dropdown.active:hover,
 .dropdown.active {
     border-radius: 5px 5px 0 0;
-    background-color: transparent;
+    background-color: rgb(31,36,45)
 }
 .dropdown.active .select > i {
     transform: rotate(-90deg)
@@ -260,7 +260,7 @@ span.choose {
     list-style: none
 }
 .dropdown .dropdown-menu li:hover {
-    background-color: rgb(31,36,45);
+    background-color: rgb(31,36,45)
 }
 .dropdown .dropdown-menu li:active {
     background-color: transparent
@@ -295,17 +295,9 @@ gtag('config','UA-158102121-1');
 <h1 class="flex-item tealText menuItem"><a href="/">{{ user.get_username }}</a></h1>
 <h1 style="" class="flex-item tealText menuItem"><a href="/logout">log out</a></h1>
 </div>
-
-<div class="container">
-<div class="block4" style="margin-left:40px;margin-top:0px">
-<h1 class="tealText" style="color:white;font-family:helvetica;font-size:17px;margin-bottom:10px;text-align:left;margin-left:0px;margin-top:5px"><a style="color:white" href="./sources/twitter">TWITTER - COMPANY FOLLOWERS</a></h1>
-<div style="height:100%">
-{{twitterGraph|safe}}
-</div>
-</div>
-<div class="block2" style="margin-top:0px;border-radius:10px;margin-bottom:20px;margin-top:0px;background-color:rgba(120,172,255,.1);box-shadow:0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19)">
-<h1 class="tealText" style="font-size:23px;letter-spacing:3px;font-family:helvetica;font-weight:normal;text-align:center;">DATA BY SOURCE</h1>
-<div style="margin-top:20px;">
+<div style="width:40%;align:center;float:left;margin-left:80px">
+<h1 class="tealText" style="text-align:center">DATA BY SOURCE</h1>
+<div style="margin-top:38px;">
     <div class="dropdown" style="margin:auto">
         <div class="select" style="margin-top:20px;text-align:center;font-family:'simplifica';font-size:18px;letter-spacing:3px;color:rgb(184,223,221)">
             <span>SELECT SOURCE</span>
@@ -313,19 +305,16 @@ gtag('config','UA-158102121-1');
         </div>
         <input type="hidden" name="gender" id="input">
         <ul class="dropdown-menu" style="margin-top:25px">
-	<li id="/sources/corporateflights">CORPORATE FLIGHTS</li>
 	<li id="/sources/coronavirus">CORONAVIRUS - US SPREAD</li>
-	<li id="/sources/covidTreatment">CORONAVIRUS - RESEARCH</li>
+	<li id="/sources/covidTreatment">CORONAVIRUS - TREATMENTS</li>
         <li id="/sources/maude">FDA</li>
         <li id="/sources/glassdoor">GLASSDOOR</li>
         <li id="/sources/insidertrading">INSIDER TRADING</li>
         <li id="/sources/climate">PREDICTIT - CLIMATE CHANGE</li>
         <li id="/sources/predictit">PREDICTIT - POLITICAL BETA</li>
         <li id="/sources/recession">PREDICTIT - RECESSION</li>
-        <li id="/sources/robinhood">ROBINHOOD USER DATA</li>
         <li id="/sources/twitter">TWITTER</li>
         <li id="/sources/uspto">US PATENT OFFICE</li>
-        <li id="/sources/senatetrading">US SENATOR TRADING</li>
         </ul>
 </div>
 <form style="margin-top:20px" onsubmit="get_action2(this);">
@@ -333,56 +322,38 @@ gtag('config','UA-158102121-1');
 </form>
 </div>
 </div>
-
-<div class="block3" style="margin-top:20px;border-radius:10px;margin-bottom:0px;background-color:rgba(120,172,255,.1);box-shadow:0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19)">
-<h1 class="tealText" style="letter-spacing:3px;font-size:23px;font-family:helvetica;font-weight:normal;text-align:center;">DATA BY COMPANY</h1>
-<form style="margin-top:20px" onsubmit="get_action(this);">
+<div style="width:40%;align:center;float:right;margin-right:80px">
+<h1 class="tealText" style="text-align:center">DATA BY COMPANY</h1>
+<form style="margin-top:40px" onsubmit="get_action(this);">
 <input autocomplete="off" autocorrect="off" autocapitalize="off" required type="text" placeholder="enter ticker" id = "ticker"></input>
 <button class="button" style="height:40px;border-radius:5px;margin-top: 30px;font-size:13px" type="submit">SEARCH</button>
 </div>
-
-<div class="block5" style="border-radius:10px;margin-top:40px;margin-bottom:40px;background-color:rgba(120,172,255,.1);box-shadow:0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19)">
-<h1 class="tealText" style="font-size:23px;letter-spacing:3px;font-family:helvetica;font-weight:normal;text-align:center;">OTHER TOOLS</h1>
-<div style="margin-top:0px;margin-bottom:30px;overflow:auto">
+<!-- <div style="margin-top:40px;width:20%;align:center;float:left;margin-right:80px">
+<img style="width:100%" src="/static/heatmaps/twitterHeat.png">
+</div> -->
+<div style="margin-top:40px;width:40%;height:300px;align:center;float:left;margin-left:80px;margin-bottom:100px">
+<h1 class="tealText" style="text-align:center">FEATURED METRIC</h1>
+<h1 class="tealText" style="margin-top:35px;text-align:center;color:white;font-size:20px;margin-bottom:20px">CORONAVIRUS DEATHS PER CAPITA</h1>
+{{ coronaDeathsGraph|safe }}
+</div>
+<div style="margin-top:40px;width:40%;align:center;float:right;margin-right:80px;margin-bottom:100px;">
+<h1 class="tealText" style="text-align:center">OTHER TOOLS</h1>
+<div style="margin-top:0px;height:350px;overflow:auto">
 <table style="width:100%">
 <tbody>
-<tr><td class="sourceRow tealText"><a href="/sources/corporateflights"><div class="tableElement">CORPORATE FLIGHTS</div></a></td></tr>
-<tr><td class="sourceRow tealText"><a href="/sources/senatetrading"><div class="tableElement">US SENATE TRADING</div></a></td></tr>
-<tr><td class="sourceRow tealText"><a href="/sources/housetrading"><div class="tableElement">US HOUSE TRADING</div></a></td></tr>
-<tr><td class="sourceRow tealText"><a href="/sources/insidertrading"><div class="tableElement">INSIDER TRADING</div></a></td></tr>
-<tr><td class="sourceRow tealText"><a href="/covidtreatments"><div class="tableElement">COVID-19 RESEARCH</div></a></td></tr>
-<tr><td class="sourceRow tealText"><a href="/sources/sharedownership"><div class="tableElement">SHARED OWNERSHIP</div></a></td></tr>
-<!-- <tr><td class="sourceRow tealText"><a href="/portfolioheat"><div class="tableElement">REAL-TIME PORTFOLIO HEATMAP</div></a></td></tr> -->
-<tr><td class="sourceRow tealText"><a href="/wallstreetbets"><div class="tableElement">R/WSB</div></a></td></tr>
+<tr><td class="sourceRow tealText"><a href="/sources/insidertrading"><div class="tableElement">INSIDER TRADING DASHBOARD</div></a></td></tr>
+<tr><td class="sourceRow tealText"><a href="/covidtreatments"><div class="tableElement">COVID-19 TREATMENT DASHBOARD</div></a></td></tr>
+<tr><td class="sourceRow tealText"><a href="/portfolioheat"><div class="tableElement">REAL-TIME PORTFOLIO HEATMAP</div></a></td></tr>
+<tr><td class="sourceRow tealText"><a href="/wallstreetbets" style="color:#DCE1D7"><div class="tableElement">R/WSB</a></td></tr>
 <!-- <tr><td class="sourceRow tealText"><a href="/sources/airpollution" style="color:#DCE1D7"><div class="tableElement">AIR POLLUTION</a></td></tr> -->
 </tbody>
 </table>
 </div>
 </div>
-
-<div class="block6" style="margin-top:-25px;margin-left:40px;">
-<h1 class="tealText" style="margin-left:0px;font-family:helvetica;color:white;font-size:18px;margin-bottom:10px;text-align:left;"><a href="./sources/robinhood" style="color:white">ROBINHOOD - MOST POPULAR STOCKS</a></h1>
-<div style="height:100%">
-{{robinhoodGraph|safe}}
-</div>
-</div>
-
-<!-- <div class="block4" style="display:none;margin-top:10px;margin-left:40px">
-<h1 class="tealText" style="color:white;font-size:18px;margin-bottom:2px;text-align:left;margin-left:8px">Glassdoor employee ratings</h1>
-<div style="height:100%">
-{{glassdoorGraph|safe}}
-</div>
-</div> -->
-
-</div>
 </body>
-
-
-
-<footer class="hide-mobile" style="position:relative;left:0;right:0;margin-top:150px;background-color:rgb(50,50,61);padding-top:10px">
+<footer class="hide-mobile" style="position:relative;left:0;right:0;margin-top:900px;background-color:rgb(50,50,61);padding-top:10px">
 <img src="/static/images/smallLogo.png"  class = "center flex-item" style="float:left;margin-bottom:10px;height:40px;max-width: 75%;"></img>
 <h1 style="margin-top:15px;float:left;margin-left:45px;font-size:13px;"><a style="color:white" href="mailto:james@quiverquant.com?subject=Contact Us">CONTACT US</a></h1>
-<h1 style="margin-top:15px;float:left;margin-left:45px;font-size:13px;"><a style="color:white" href="../privacypolicy">PRIVACY POLICY</a></h1>
 <div style="background-color:rgb(50,50,61);height:10%;width:100%"></div>
 </footer>
 {{ error }}

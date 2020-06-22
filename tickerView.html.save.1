@@ -6,47 +6,6 @@ html {
 	overflow-y: scroll; 
 }
 
-input {
-color:rgb(85,179,175);
-background-color:transparent;
-border: 1px solid black;
-display: block;
-align-items: left;
-margin:auto;
-padding-left: 10px;
-border-color: gray;
-width: 275px;
-height: 60px;
-font-size: 20px;
-text-align: center;
-border-radius: 6px;
-margin-bottom:15px;
-}
-
-.excelImage {
-margin-right:60px;
-margin-left:20px;
-margin-top:18px;
-width:27px;
-float:left
-}
-
-
-.button2 {
-color:rgb(184,223,221);
-background-color:transparent;
-border: 1px solid black;
-display: block;
-align-items:left;
-border-color: rgb(184,223,221);
-width:275px;
-height:40px;
-margin-left:40px;
-font-size:15px;
-margin-top:30px;
-margin:auto
-}
-
 button {
 	width:200px;
 	padding:0px;
@@ -85,7 +44,7 @@ body {
 h1 {
     font-family: "simplifica";
     font-weight: bold;
-    font-size: 35px;
+    font-size: 40px;
     letter-spacing: 5px;
 }
 @font-face {
@@ -98,10 +57,11 @@ h1 {
     position:relative;
     top:-10px;
 }
-::-webkit-scrollbar{
-background:transparent;
+::-webkit-scrollbar {
 width:0px;
+background:transparent
 }
+
 .metricContainer {
   margin-top: 10px;
   margin-bottom:0px;
@@ -115,10 +75,9 @@ width:0px;
   background-color: rgb(34,46,62);
   width:45%;
   float:left;
-  # border: 1px gray solid;
+  border: 1px gray solid;
   height: 385px;
   overflow: scroll;
-  box-shadow:0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 .tealMetrics {
     margin-bottom: 0px;
@@ -208,19 +167,13 @@ td{
   border-bottom: solid 1px rgba(255,255,255,0.1);
 }
 </style>
-<head>
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-158102121-1"></script>
-<script> window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config','UA-158102121-1'); </script>
-</head>
+
 <div style="height:200%; width:100%">
 <div class = "snap-point flex" style="text-align:left"><a href=".."><img src="{% static '/images/logo.png' %}"  class = "center flex-item" style="margin-bottom:25px;height:60px;max-width: 100%"></a>
-<h1 class="flex-item tealText menuItem"><a href="/">{{ user.get_username }}</a></h1>
+<h1 class="flex-item tealText menuItem"><a href="/profile">{{ user.get_username }}</a></h1>
 <h1 class="flex-item tealText menuItem"><a href="/logout">log out</a></h1>
 </div>
-<h1 style="font-family:avenir next;color:white;text-align:center" id="ticker">{{ ticker }}</h1>
+<h1 style="color:white; margin-left:30px;text-align:center">{{ ticker }}</h1>
 {% load humanize %}
 {% if predictit|length > 0 %}
 <div class="metricContainer">
@@ -231,6 +184,7 @@ gtag('config','UA-158102121-1'); </script>
 <h1 class="tealMetrics">Biden: {{candidate.0|floatformat:3}}</h1>
 <h1 class="tealMetrics">Sanders: {{candidate.1|floatformat:3}}</h1>
 <h1 class="tealMetrics">Trump: {{candidate.2|floatformat:3}}</h1>
+<h1 class="tealMetrics">Warren: {{candidate.3|floatformat:3}}</h1>
 {% endfor %}
 </div>
 {% endif %}
@@ -257,7 +211,7 @@ gtag('config','UA-158102121-1'); </script>
         </tr>
         {% endfor %}
     {% for info in maudeQuarterly %}      
-	    <tr class="hiddenQuarterlyMAUDE" style="display:none"> <td style="text-align:center;color: rgb(85,179,175);">{{info.0}}</td>
+	    <tr class="hiddenQuarterlyMAUDE" style="display:none"> <td style="text-align:center;color: rgb(85,179,175);">{{info.0.quarter}}/{{info.0.year}}</td>
         <td style="text-align:center;color: rgb(85,179,175);">{{info.1|floatformat:"0"|intcomma}}</td>
         <td style="text-align:center;color: rgb(85,179,175);">{{info.2|floatformat:"0"|intcomma}}</td>
         <td style="text-align:center;color: rgb(85,179,175);">{{info.3|floatformat:"0"|intcomma}}</td>
@@ -267,8 +221,8 @@ gtag('config','UA-158102121-1'); </script>
         </table>
 </div>
 <div>
-	<a href="http://www.quiverquant.com/download/MAUDE/{{ticker}}"><img src="{% static '/images/excelLogo.png' %}" class="excelImage"></img></a>
-	<button type="button" style="margin-bottom:0px;width:200px;float:left;border-width:0px" class="button quarterlyMAUDEButton" id = "quarterlyMAUDEButton">Switch to Quarterly</button>
+        <button type="button" style="margin-bottom:0px;width:200px;float:left;border-width:0px" class="button quarterlyMAUDEButton" id = "quarterlyMAUDEButton">Switch to Quarterly</button>
+	<button type="button" style="margin-bottom:0px;width:200px;float:left;border-width:0px" class="button" onClick="window.open('http://www.quiverquant.com/download/maude/{{ ticker }}');">Download to Excel</button>
 </div> 
  </div>
   {% endif %}
@@ -301,17 +255,14 @@ gtag('config','UA-158102121-1'); </script>
  </tbody>
       </table>
 </div>
-<div>
-<a href="http://www.quiverquant.com/download/Glassdoor/{{ticker}}"><img src="{% static '/images/excelLogo.png' %}" class="excelImage"></img></a>
-<button type="button" style="border-width:0px;margin-bottom:0px;width:200px;float:left" class="button buttonQuarterly" id = "quarterlyButton">Switch to Quarterly</button>
-</div>
+<button type="button" style="border-width:0px" class="button buttonQuarterly" id = "quarterlyButton">Switch to Quarterly</button>
 </div>
 {% endif %}
 {% if patents|length > 0 %}
 <div class="metricContainer">
 <h1 class="tealMetrics" style="color:rgb(133,180,255)">Patent Trends</h1>
-<h1 class="tealMetrics" style="color:gray">tech momentum measures the recent performance of a companies technological peers</h1>
-<h1 class="tealMetrics" style="margin-bottom: 0px;color:gray">patent drift measures internal technological change</h1>
+<h1 class="tealMetrics" style="color:gray">Tech momentum measures the recent performance of a companies technological peers</h1>
+<h1 class="tealMetrics" style="margin-bottom: 0px;color:gray">Patent drift measures internal technological change</h1>
 <div style="height:200px;overflow:auto;">
     <table class="pure-table pure-table-horizontal" style="border-width:1;margin-left:0px">
         <tbody>
@@ -330,46 +281,29 @@ gtag('config','UA-158102121-1'); </script>
      </tbody>
           </table>
     </div>
-	<a href="http://www.quiverquant.com/download/Patents/{{ticker}}"><img src="{% static '/images/excelLogo.png' %}" class="excelImage"></img></a>
 </div>
 {% endif %}
-{% if insidertrading|length > 0 %}
-<div class="metricContainer">
-<h1 class="tealMetrics" style="color:rgb(133,180,255)">Insider Trading</h1>
-<h1 class="tealMetrics" style="margin-bottom:30px;color:gray">all metrics are calculated based on the last six months of trading activity by a company's directors and management</h1>
-{% for metric in insidertrading %}
-<h1 class="tealMetrics">Insider Confidence Index: {{metric.1|floatformat:2}}</h1>
-<h1 class="tealMetrics">Shares bought: {{metric.2|intcomma}}</h1>
-<h1 class="tealMetrics">Shares sold: {{metric.3|intcomma}}</h1>
-{% endfor %}
-</div>
-{% endif %}
-
-
 
 {% if indeed|length > 0 %}
 <div class="metricContainer">
 <h1 class="tealMetrics" style="color:rgb(133,180,255)">Indeed</h1>
 <h1 class="tealMetrics" style="color:gray">job openings posted on Indeed</h1>
-<div style="float:left;height:250px;overflow:auto;">
+<div style="height:250px;overflow:auto;">
     <table class="pure-table pure-table-horizontal" style="border-width:1;margin-left:0px">
         <tbody>
     <tr>
-            <th style = "text-align:right;" id = "period">Date</th>
+            <th style = "text-align:right;" id = "period">Month</th>
             <th style = "text-align:center;">Openings</th>
           </tr>
           {% for info in indeed %}
           <tr class="">
-            <td style="text-align:center;color: rgb(85,179,175);">{{info.0.month}}/{{info.0.day}}/{{info.0.year}}</td>
+            <td style="text-align:center;color: rgb(85,179,175);">{{info.0.month}}/{{info.0.year}}</td>
             <td style="text-align:center;color: rgb(85,179,175);">{{info.1|floatformat:0|intcomma}}</td>
           </tr>
           {% endfor %}
      </tbody>
           </table>
     </div>
-<div style="margin-top:50px;margin-left:40px;float:left;height:250px;width:250px">
-{{indeedGraph|safe}}
-</div>
 </div>
 {% endif %}
 
@@ -377,51 +311,26 @@ gtag('config','UA-158102121-1'); </script>
 <div class="metricContainer">
 <h1 class="tealMetrics" style="color:rgb(133,180,255)">Twitter</h1>
 <h1 class="tealMetrics" style="color:gray">followers on company's Twitter account</h1>
-<div style="height:250px;overflow:auto;float:left">
+<div style="height:250px;overflow:auto;">
     <table class="pure-table pure-table-horizontal" style="border-width:1;margin-left:0px">
         <tbody>
     <tr>
-            <th style = "text-align:right;" id = "period">Date</th>
+            <th style = "text-align:right;" id = "period">Month</th>
             <th style = "text-align:center;">Followers</th>
           </tr>
           {% for info in twitter %}
           <tr class="">
-            <td style="text-align:center;color: rgb(85,179,175);">{{info.0.month}}/{{info.0.day}}/{{info.0.year}}</td>
+            <td style="text-align:center;color: rgb(85,179,175);">{{info.0.month}}/{{info.0.year}}</td>
             <td style="text-align:center;color: rgb(85,179,175);">{{info.1|floatformat:0|intcomma}}</td>
           </tr>
           {% endfor %}
      </tbody>
           </table>
     </div>
-<div style="margin-top:50px;margin-left:40px;float:left;height:250px;width:250px">
-{{twitterGraph|safe}}
-</div>
 </div>
 {% endif %}
 
-{% if stores|length > 0 %}
-<div class = "metricContainer">
-<h1 class="tealMetrics" style = "color:rgb(133,180,255)">Store Locations</h1>
-<div style = "height:250px;overflow:auto;">
-<table class="pure-table pure-table-horizontal" style="">
-<tbody>
-<tr>
-<th style="text-align:right">Month</th>
-<th style="text-align:right">Store Locations</th>
-</tr>
-{% for info in stores %}
-<tr class="hiddenQuarterly2">
-<td style="text-align:right;color: rgb(85,179,175);">{{info.0.month}}/{{info.0.year}}</th>
-<td style="text-align:right;color: rgb(85,179,175);">{{info.1|intcomma}}</th>
-</tr>
-{% endfor %}
-</tbody>
-</table>
-</div>
-</div>
-{% endif %}
 {% if traffic|length > 0 %}
-<!--
 <div class="metricContainer">
 <h1 class="tealMetrics" style="color:rgb(133,180,255)">Web Traffic</h1>
 <h1 class="tealMetrics" style="color:gray">company's website traffic ranking</h1>  
@@ -442,33 +351,12 @@ gtag('config','UA-158102121-1'); </script>
       </table>
 </div>
 </div>
--->
 {% endif %}
-<!-- <div class="metricContainer">
-<h1 class="tealMetrics" style="color:rgb(133,180,255)">Google Search Trends</h1>
-<h1 class="tealMetrics" style="color:gray">Google search trends on {{ticker}} fiscal quarters</h1>
-<form autocomplete="off" style="" onsubmit="get_action(this);">
-<input required type="text" placeholder="search phrase" id = "phrase"></input>
-<button class="button2" style="height:40px;border-radius:5px;margin-top: 30px;font-size:13px" type="submit">GENERATE REPORT</button>
 </div>
--->
-</div>
-
-<footer style="margin-top:200px;padding-top:40px">
-<div style="height:5%;margin-left:0px;margin-right:0px;width:100%"></div>
-</footer>
 </html>
 
 
-
 <script> 
-function get_action(form) {
-	form.action = 'https://www.quiverquant.com/googleTrends/'+document.getElementById("ticker").innerHTML + "/" + document.getElementById("phrase").value;
-}
-
-
-
-
 var quar = document.getElementsByClassName("buttonQuarterly"); 
 var i;
 var expandButton = document.getElementById("expandButton"); 

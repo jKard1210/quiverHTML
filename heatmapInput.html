@@ -1,0 +1,231 @@
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        </head>
+<style>
+{% load static %}
+
+@import url(https://fonts.googleapis.com/css?family=Chivo);
+@font-face {
+font-family: 'simplifica';
+src: url({% static 'fonts/simplifica.woff' %}) format('woff'),url({% static 'fonts/simplifica.ttf' %}) format('truetype');
+}
+
+.flex {
+	display: flex;
+	justify-content: left;
+}
+
+.flex-item + .flex-item {
+	margin-left: 40px;
+}
+
+
+
+body {
+	margin:0;
+	padding:0;
+	height:100%;
+	background:rgb(31,36,45);
+	font-family: 'Chivo', arial, tahoma, sans-serif;
+	font-size:16px;
+	font-weight:normal;
+}
+
+h2 {
+  margin:15% auto 5% auto;
+	text-align:center;
+	color:#FFFFFF;
+	font-size:16px;
+}
+
+a {
+  margin:0;
+  padding:0;
+  color:rgb(85,179,175);
+  text-decoration:none;
+  text-align:center;
+  -webkit-transition:0.2s ease all;
+	   -moz-transition:0.2s ease all;
+	    -ms-transition:0.2s ease all;
+	     -o-transition:0.2s ease all;
+	        transition:0.2s ease all;
+}
+
+a:hover {
+  color:#ADADAD;
+}
+
+a:active {
+  position:relative;
+  top:1px;
+}
+
+form {
+  margin:0 auto;
+	padding:20px;
+	width:auto;
+	height:auto;
+	overflow:hidden;
+	border-radius:3px;
+	text-align:center;
+}
+
+label {
+  margin:0;
+  display:inline-block;
+  padding:10px;
+  width:auto;
+  padding-right:20px;
+  padding-left:20px;
+  max-width:300px;
+  height:auto;
+  background-color:#929292;
+  border:none;
+  color:#fff;
+  cursor:pointer;
+  text-align:center;
+  margin-bottom:20px;
+  border-radius:5px;
+  -webkit-border-radius:5px;
+  -webkit-transition:0.2s ease all;
+     -moz-transition:0.2s ease all;
+      -ms-transition:0.2s ease all;
+       -o-transition:0.2s ease all;
+          transition:0.2s ease all;
+}
+
+label:hover {
+  background:#ADADAD;
+}
+
+[type=file]{
+  display:none;
+}
+
+#info {
+  display:none;
+  margin:5% auto;
+	padding:10px 20px;
+	width:400px;
+	height:auto;
+	overflow:hidden;
+	background:#FFFFFF;
+	border-radius:3px;
+}
+
+#size span, #type span, #name span {
+  color:#EA4026;
+}
+
+.menuItem{
+	font-size:23px;
+	display:block;
+	width:auto;
+	max-height:50%;
+	height:auto;
+	margin-left:40px;
+	display:inline-block;
+	align-items:center;
+	top:4px;
+}
+
+
+.tealText {
+	font-family:"simplifica";
+	font-weight:bold;
+	font-size:25px;
+	letter-spacing:5px;
+	position:relative;
+	color:rgb(85,179,175);
+}
+
+button {
+color: rgb(184,223,221);
+background-color: transparent;
+border: 1px solid black;
+align-items: center;
+display:block;
+border-color: rgb(184,223,221);
+padding:10px;
+padding-right:20px;
+padding-left:20px;
+width: auto;
+border-radius: 5px;
+height:auto;
+font-size: 14px;
+margin: auto;
+}
+
+h1 {
+font-family: "simplifica";
+font-weight: bold;
+font-size: 35px;
+letter-spacing: 5px;
+}
+
+
+</style>
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-158102121-1"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config','UA-158102121-1');
+</script>
+</head>
+
+
+
+{% load static %}
+{% csrf_token %}
+    <body>
+	<div class = "snap-point flex" style="text-align:left"><a href=".."><img src="{% static '/images/logo.png' %}"  class = "center flex-item" style="margin-bottom:25px;height:60px;max-width: 100%"></a>
+	<h1 class="flex-item tealText menuItem"><a href="/">{{ user.get_username }}</a></h1>
+	<h1 style="" class="flex-item tealText menuItem"><a href="/logout">log out</a></h1>
+	</div>
+	<div style="margin-left:100px;margin-right:100px">
+        <h2>Upload a CSV with a column of tickers to generate a dynamic heatmap based on category, market cap, and current day's return</h2>
+
+        <form action={% url "altData:heatmapInput" %} method="post" enctype="multipart/form-data">
+	{% csrf_token %}
+          <label for="file">Choose File</label>
+          <input type="file" name="csv_file" id="file" />
+	  <button type="submit">Generate Heatmap</button>
+        </form>
+{% if messages %}
+{% for message in messages %}
+<p style="color:red">{{message}}</p>
+{% endfor %}
+{% endif %}
+</div>
+    </body>
+</html>
+
+
+<script>
+$(function(){
+  
+  $("[type=file]").on("change", function(){
+  var file = this.files[0];
+  var formdata = new FormData();
+  formdata.append("file", file);
+  if(file.name.length >= 30){
+    $('label').text("Chosen : " + file.name.substr(0,30) + '..');
+  }else {
+    $('label').text("Chosen : " + file.name);
+  }
+  
+  var ext = $('#file').val().split('.').pop().toLowerCase();
+  if($.inArray(ext, ['csv']) == -1) {
+    $('#info').hide();
+    $('label').text('Choose File');
+    $('#file').val('');
+    alert('Error: This file is not a CSV');
+  }
+    
+  });
+
+});
+</script>

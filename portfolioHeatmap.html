@@ -1,0 +1,238 @@
+<html>
+
+<style>
+{% load static %}
+html {
+	overflow-y: scroll; 
+}
+
+
+
+input {
+color:rgb(85,179,175);
+background-color:transparent;
+border: 1px solid black;
+display: block;
+align-items: left;
+margin:auto;
+padding-left: 10px;
+border-color: gray;
+width: 275px;
+height: 60px;
+font-size: 20px;
+text-align: center;
+border-radius: 6px;
+margin-bottom:15px;
+}
+
+.button2 {
+color:rgb(184,223,221);
+background-color:transparent;
+border: 1px solid black;
+display: block;
+align-items:left;
+border-color: rgb(184,223,221);
+width:275px;
+height:40px;
+margin-left:40px;
+font-size:15px;
+margin-top:30px;
+margin:auto
+}
+
+button {
+	width:200px;
+	padding:0px;
+}
+body {
+    background-color: rgb(31,36,45)
+}
+.center {
+  display: block;
+  width: auto;
+  max-height: 50%;
+  height:auto;
+  margin-left: 40px;
+}
+.collapsible {
+  margin-left: 80px;
+  margin-right: 40px;
+  cursor: pointer;
+  padding: 18px;
+  border: none;
+  text-align: center;
+  outline: none;
+  font-size: 15px;
+}
+.active, .button:hover {
+  color: #ccc;
+}
+.tempHidden {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+}
+.is-open, .tempHidden {
+  display:none;
+}
+h1 {
+    font-family: "simplifica";
+    font-weight: bold;
+    font-size: 40px;
+    letter-spacing: 5px;
+}
+@font-face {
+  font-family: 'simplifica';
+  src: url({% static 'fonts/simplifica.woff' %}) format('woff'), /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+   url({% static 'fonts/simplifica.ttf' %}) format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+}
+
+tr {
+	font-family: 'simplifica';
+	font-size:18px;
+	letter-spacing:2px;
+}  
+.redText {
+    color: rgb(184,106,106);
+    position:relative;
+    top:-10px;
+}
+::-webkit-scrollbar{
+background:transparent;
+width:0px;
+}
+.metricContainer {
+  margin-top: 10px;
+  margin-bottom:0px;
+  margin-left:40px;
+  overflow: -moz-scrollbars-none;
+  -ms-overflow-style: none;
+  padding-left:20px;
+  padding-right:20px;
+  border-radius:5px;
+  padding-top:10px;
+  background-color: rgb(34,46,62);
+  width:45%;
+  float:left;
+  border: 1px gray solid;
+  height: 385px;
+  overflow: scroll;
+  box-shadow:0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+.tealMetrics {
+    margin-bottom: 0px;
+    margin-top:10px;
+    font-size: 20px;
+    letter-spacing: 2px;
+}
+.button {
+    margin-bottom:0px;
+    color: rgb(184,223,221);
+    background-color: transparent;
+    border: 0px solid black;
+    display: block;
+    align-items: left;
+    text-align: left;
+    border-color: rgb(184,223,221);
+    width: 200px;
+    height:40px;
+    font-size: 15px;
+    margin-top:10px;
+    margin-right: auto;
+}
+form {
+margin-top:75px;
+}
+.flex {
+  display: flex;
+  justify-content: left;
+}
+.flex-item + .flex-item {
+  margin-left: 40px;
+}
+.rightbutton {
+    position: relative;
+    left: 200px;
+}
+.menuItem{
+    font-size: 23px;
+    display: block;
+    width: auto;
+    max-height: 50%;
+    height:auto;
+    display: inline-block;
+    align-items: center;
+    margin-left:40px;
+    top: 4px;
+}
+a {
+  text-decoration: none;
+  color: rgb(85,179,175);
+}
+
+
+
+h1 {
+  position:relative;
+  top:-10px;
+  color: rgb(85,179,175);
+}
+table{
+  table-layout: fixed;
+}
+.tbl-header{
+  background-color: rgba(255,255,255,0.3);
+ }
+.tbl-content{
+  height:300px;
+  overflow-x:auto;
+  margin-top: 0px;
+  border: 1px solid rgba(255,255,255,0.3);
+}
+th{
+  padding: 20px 15px;
+  text-align: left;
+  font-weight: 500;
+  font-size: 12px;
+  color: #fff;
+  font-family: 'simplifica';
+  background-color: transparent;
+  text-transform: uppercase;
+  font-size: 20px;
+  letter-spacing:2px;
+}
+td{
+  padding: 15px;
+  vertical-align:middle;
+  font-weight: 300;
+  font-size: 12px;
+  color: #fff;
+  border-bottom: solid 1px rgba(255,255,255,0.1);
+}
+</style>
+
+<link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css" integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossorigin="anonymous">
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-158102121-1"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config','UA-158102121-1');
+</script>
+
+<div style="height:90%; width:100%">
+<div class = "snap-point flex" style="text-align:left"><a href=".."><img src="{% static '/images/logo.png' %}"  class = "center flex-item" style="margin-bottom:0px;height:60px;max-width: 100%"></a>
+<h1 class="flex-item tealText menuItem"><a href="/">{{ user.get_username }}</a></h1>
+<h1 class="flex-item tealText menuItem"><a href="/logout">log out</a></h1>
+</div>
+<h1 style="color:white; margin-left:30px;text-align:center" id="ticker">{{ ticker }}</h1>
+{% load humanize %}
+<div style="width:100%;height:90%">
+{{ graph|safe }}
+</div>
+{% for message in messages %}
+<p style="color:red">{{ message }}</p>
+{% endfor %}
+</div>
+</html>
+

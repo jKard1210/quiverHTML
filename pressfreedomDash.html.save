@@ -1,0 +1,846 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://ogp.me/ns/fb#">
+
+<style>
+{% load static %}
+html {
+	overflow-y: scroll; 
+}
+
+.excelImage {
+height:30px;
+margin-top:25px;
+margin-left:80px;
+float:left;
+}
+
+input {
+color:rgb(85,179,175);
+background-color:transparent;
+border: 1px solid black;
+display: block;
+align-items: left;
+margin:auto;
+padding-left: 10px;
+border-color: gray;
+width: 275px;
+height: 60px;
+font-size: 20px;
+text-align: center;
+border-radius: 6px;
+margin-bottom:15px;
+}
+
+.button2 {
+color:rgb(184,223,221);
+background-color:transparent;
+border: 1px solid black;
+display: block;
+align-items:left;
+border-color: rgb(184,223,221);
+width:275px;
+height:40px;
+margin-left:40px;
+font-size:15px;
+margin-top:30px;
+margin:auto
+}
+
+button {
+	width:200px;
+	padding:0px;
+}
+body {
+    background-color: rgb(31,36,45)
+}
+.center {
+  display: block;
+  width: auto;
+  max-height: 50%;
+  height:auto;
+  margin-left: 30px;
+}
+.collapsible {
+  margin-left: 80px;
+  margin-right: 40px;
+  cursor: pointer;
+  padding: 18px;
+  border: none;
+  text-align: center;
+  outline: none;
+  font-size: 15px;
+}
+.active, .button:hover {
+  color: #ccc;
+}
+.tempHidden {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+}
+.is-open, .tempHidden {
+  display:none;
+}
+h1 {
+    font-family: "simplifica";
+    font-weight: bold;
+    font-size: 40px;
+    letter-spacing: 5px;
+}
+@font-face {
+  font-family: 'simplifica';
+  src: url({% static 'fonts/simplifica.woff' %}) format('woff'), /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+   url({% static 'fonts/simplifica.ttf' %}) format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+}
+
+tr {
+	font-family: 'system-ui';
+	font-size:16px;
+	letter-spacing:1px;
+}  
+.redText {
+    color: rgb(184,106,106);
+    position:relative;
+    top:-10px;
+}
+::-webkit-scrollbar{
+background:transparent;
+width:0px;
+}
+.metricContainer {
+  margin-top: 10px;
+  margin-bottom:0px;
+  margin-left:40px;
+  overflow: -moz-scrollbars-none;
+  -ms-overflow-style: none;
+  padding-left:20px;
+  padding-right:20px;
+  border-radius:5px;
+  padding-top:10px;
+  background-color: rgb(34,46,62);
+  width:55%;
+  float:left;
+  border: 1px gray solid;
+  height: 385px;
+  overflow: scroll;
+  box-shadow:0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+.tealMetrics {
+    margin-bottom: 0px;
+    margin-top:10px;
+    font-size: 20px;
+    letter-spacing: 2px;
+}
+.button {
+    margin-bottom:0px;
+    color: rgb(184,223,221);
+    background-color: transparent;
+    border: 0px solid black;
+    display: block;
+    align-items: left;
+    text-align: left;
+    border-color: rgb(184,223,221);
+    width: 200px;
+    height:40px;
+    font-size: 15px;
+    margin-top:10px;
+    margin-right: auto;
+}
+form {
+margin-top:75px;
+}
+.flex {
+  display: flex;
+  justify-content: left;
+}
+.flex-item + .flex-item {
+  margin-left: 40px;
+}
+.rightbutton {
+    position: relative;
+    left: 200px;
+}
+.menuItem{
+    font-size: 23px;
+    display: block;
+    width: auto;
+    max-height: 50%;
+    height:auto;
+    display: inline-block;
+    align-items: center;
+    margin-left:40px;
+    top: 6px;
+}
+a {
+  text-decoration: none;
+  color: rgb(133,180,255);
+}
+
+
+
+h1 {
+  position:relative;
+  top:-10px;
+  color: rgb(85,179,175);
+}
+table{
+  table-layout: fixed;
+}
+.tbl-header{
+  background-color: rgba(255,255,255,0.3);
+ }
+.tbl-content{
+  height:300px;
+  overflow-x:auto;
+  margin-top: 0px;
+  border: 1px solid rgba(255,255,255,0.3);
+}
+th{
+  padding: 20px 15px;
+  text-align: left;
+  font-weight: 500;
+  font-size: 8px;
+  color: #fff;
+  font-family: 'system-ui';
+  background-color: transparent;
+  text-transform: uppercase;
+  font-size: 20px;
+  letter-spacing:2px;
+}
+td{
+  padding: 15px;
+  vertical-align:middle;
+  font-weight: 300;
+  font-size: 12px;
+  color: #fff;
+  border-bottom: solid 1px rgba(255,255,255,0.1);
+}
+
+.dropdownLink {
+color:white;
+}
+
+.dropdown{
+padding-left:10px;
+padding-right:10px;
+float:right;
+margin-right:20px;
+margin-left:20px;
+}
+
+.dropdown-text {
+font-size:15px;
+padding-left:10px;
+padding-right:10px;
+}
+
+.dropdown-content {
+display:none;
+position:absolute;
+background-color:rgb(31,36,45);
+min-width:160px;
+box-shadow:0px 8px 16px 0px rgba(0,0,0,0.2);
+z-index:1;
+}
+
+.dropdown:hover .dropdown-content {
+display:block;
+}
+
+.robinGraph {
+width:66%
+}
+
+@media only screen and (max-device-width: 800px) {
+.robinGraph {
+width:50%
+}
+}
+
+</style>
+
+<link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css" integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossorigin="anonymous">
+<head>
+<title>Quiver Quantitative</title>
+<meta property="og:image:url" content="http://www.quiverquant.com/static/images/robinhood_preview.png" />
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@quiverquant">
+<meta name="twitter:title" content="Robinhood User Holdings Dashboard">
+<meta name="twitter:description" content="Track trading trends among Robinhood users">
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-158102121-1"></script>
+<script> 
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date()); 
+gtag('config','UA-158102121-1');
+</script>
+</head>
+<body onload="load()">
+<div style="width:100%;padding-bottom:80px">
+<div class = "snap-point flex" style="margin-top:5px;text-align:left"><a href=".."><img src="{% static '/images/logo.png' %}"  class = "center flex-item" style="margin-bottom:25px;height:60px;max-width: 100%"></a>
+<!-- <h1 class="flex-item tealText menuItem" style="color:rgb(133,180,255);margin-left:70px;"><a style="" href="/sources/insidertrading">insider trading</a></h1> -->
+<!-- <div class="dropdown" style="margin-left:0px;margin-right:0px;">
+<h1 style="margin-right:0px" class="flex-item tealText menuItem" style="">more free tools</h1>
+<div class="dropdown-content">
+<h1 class="dropdown-text"><a class="dropdownLink" href="/wallstreetbets">r/WSB Index</a></h1>
+<h1 class="dropdown-text"><a class="dropdownLink" href="/sources/insidertrading">Insider Trading</a></h1>
+<h1 class="dropdown-text"><a class="dropdownLink" href="/sources/twitter">Social Media Trends</a></h1>
+<h1 class="dropdown-text"><a class="dropdownLink" href="/covidtreatments">COVID-19 Treatment Research</a></h1>
+</div>
+</div> -->
+<!-- <h1 style="margin-left:30px;color:white" class="flex-item tealText menuItem"><a href="/aboutus">about us</a></h1> -->
+<h1 style="font-family:avenir next;font-size:20px;font-weight:normal;margin-left:80px;color:white" class="flex-item tealText menuItem"><a href="https://twitter.com/QuiverQuant">follow us on Twitter</a></h1>
+<!-- <h1 style="font-family:avenir next;font-size:20px;font-weight:normal;margin-left:80px;color:white" class="flex-item tealText menuItem"><a href="/">more data</a></h1> -->
+<h1 style="font-family:avenir next;font-size:20px;font-weight:normal;margin-left:80px;color:white" class="flex-item tealText menuItem"><a href="/aboutus">about us</a></h1>
+</div>
+{% load humanize %}
+<h1 class="tealMetrics" style="margin-top:10px;font-size:25px;font-spacing:3px;font-family:avenir next;color:rgb(103,200,154);text-align:left;margin-left:40px">ROBINHOOD USER DATA</h1>
+
+<div style="height:500px;margin-top:10px;margin-bottom:20px">
+<h1 class="tealMetrics" style="margin-left:40px;font-family:avenir next;font-weight:normal;color:rgb(133,180,255)">HISTORICAL PERFORMANCE</h1>
+<h1 class="tealMetrics" style="margin-left:40px;font-weight:normal;font-size:18px;font-spacing:2px;font-family:avenir next;color:white;text-align:left;">backtested results of a portfolio that rebalances every day with stocks weighted based on # of Robinhood holders</h1>
+
+{{graph|safe}}
+</div>
+<div style = "margin-left:40px;float:left;width:25%;padding-top:120px">
+<h1 class="tealMetrics" style="font-family:avenir next;font-weight:normal;color:rgb(133,180,255)">CURRENT PORTFOLIO</h1>
+<h1 class="tealMetrics" style="font-weight:normal;font-size:18px;font-spacing:2px;font-family:avenir next;color:white;text-align:left;">current Robinhood user holdings (updated weekly)</h1>
+
+<div style="float:left;height:700px;overflow:auto;">
+<div>
+    <input style="margin-bottom:20px;height:40px;margin-top:20px;color:gray;font-size:13px;text-align:left" type="text" id="myInput" onkeyup="myFunction()" placeholder="Filter by stock..">
+</div>
+    <table style="max-width:25%" class="pure-table pure-table-horizontal sortable" id = "myTable" style="border-width:1;margin-left:0px;">
+ <tbody style="background-color:rgba(0,0,0,0)">
+    <tr style="color:rgb(133,180,255);background-color:rgba(0,0,0,0)">
+	    <th class="tealMetrics" style = "font-weight:bold;text-align:center;color:rgb(31,36,45)">STOCK</th>
+            <th  style = "text-align:center;font-weight:bold;color:rgb(31,36,45)"># USERS HOLDING</th>
+            <th onclick="" style = "text-align:center;font-weight:bold;color:rgb(31,36,45)">1M % Change</th>
+          </tr>
+          {% for info in robinhood %}
+	{% if info.2 != None %}
+          <tr class="">
+	    <td style="text-align:center;color:white;font-family:system-ui"><a style="color:rgb(133,180,255)" href="../dashboard/{{info.0}}">{{info.0}}</a></td>
+	    <td style="text-align:center;color:white;font-family:system-ui">{{info.1|intcomma}}</td>
+	{% if info.2 >= 0 %}
+	    <td style="text-align:center;color:rgb(48, 204, 90);font-family:system-ui">{{info.2|floatformat:2}}%</td>
+	{% endif %}
+	{% if info.2 < 0 %}
+	    <td style="text-align:center;color:rgb(246, 53, 56);font-family:system-ui">{{info.2|floatformat:2}}%</td>
+	{% endif %}
+          </tr>
+	{% endif %}
+          {% endfor %}
+     </tbody>
+          </table>
+    </div>
+</div>
+<div class="robinGraph" style="float:right;height:700px;margin-top:120px;padding-right:4%;">
+{{graph|safe}}
+<h1 class="tealMetrics" style="font-weight:normal;font-size:18px;font-spacing:2px;font-family:avenir next;color:white;text-align:left;"><a href="https://www.robintrack.net">source: robintrack.net</a></h1>
+</div>
+
+<h1 class="tealMetrics" style="float:right;font-size:28px;margin-bottom:20px;text-align:center;margin-top:220px;font-family:avenir next;font-weight:normal;color:rgb(133,180,255);width:100%">OTHER DATASETS</h1>
+<a href="../sources/senatetrading" style=""><img src="/static/images/senatetrading_banner.png" style="margin-left:5%;width:90%"></img></a>
+</body>
+</html>
+
+<script> 
+function myFunction() {
+  // Declare variables
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+
+var stIsIE = /*@cc_on!@*/false;
+
+sorttable = {
+  init: function() {
+    // quit if this function has already been called
+    if (arguments.callee.done) return;
+    // flag this function so we don't do the same thing twice
+    arguments.callee.done = true;
+    // kill the timer
+    if (_timer) clearInterval(_timer);
+
+    if (!document.createElement || !document.getElementsByTagName) return;
+
+    sorttable.DATE_RE = /^(\d\d?)[\/\.-](\d\d?)[\/\.-]((\d\d)?\d\d)$/;
+
+    forEach(document.getElementsByTagName('table'), function(table) {
+      if (table.className.search(/\bsortable\b/) != -1) {
+        sorttable.makeSortable(table);
+      }
+    });
+
+  },
+
+  makeSortable: function(table) {
+    if (table.getElementsByTagName('thead').length == 0) {
+      // table doesn't have a tHead. Since it should have, create one and
+      // put the first table row in it.
+      the = document.createElement('thead');
+      the.appendChild(table.rows[0]);
+      table.insertBefore(the,table.firstChild);
+    }
+    // Safari doesn't support table.tHead, sigh
+    if (table.tHead == null) table.tHead = table.getElementsByTagName('thead')[0];
+
+    if (table.tHead.rows.length != 1) return; // can't cope with two header rows
+
+    // Sorttable v1 put rows with a class of "sortbottom" at the bottom (as
+    // "total" rows, for example). This is B&R, since what you're supposed
+    // to do is put them in a tfoot. So, if there are sortbottom rows,
+    // for backwards compatibility, move them to tfoot (creating it if needed).
+    sortbottomrows = [];
+    for (var i=0; i<table.rows.length; i++) {
+      if (table.rows[i].className.search(/\bsortbottom\b/) != -1) {
+        sortbottomrows[sortbottomrows.length] = table.rows[i];
+      }
+    }
+    if (sortbottomrows) {
+      if (table.tFoot == null) {
+        // table doesn't have a tfoot. Create one.
+        tfo = document.createElement('tfoot');
+        table.appendChild(tfo);
+      }
+      for (var i=0; i<sortbottomrows.length; i++) {
+        tfo.appendChild(sortbottomrows[i]);
+      }
+      delete sortbottomrows;
+    }
+
+    // work through each column and calculate its type
+    headrow = table.tHead.rows[0].cells;
+    for (var i=0; i<headrow.length; i++) {
+      // manually override the type with a sorttable_type attribute
+      if (!headrow[i].className.match(/\bsorttable_nosort\b/)) { // skip this col
+        mtch = headrow[i].className.match(/\bsorttable_([a-z0-9]+)\b/);
+        if (mtch) { override = mtch[1]; }
+	      if (mtch && typeof sorttable["sort_"+override] == 'function') {
+	        headrow[i].sorttable_sortfunction = sorttable["sort_"+override];
+	      } else {
+	        headrow[i].sorttable_sortfunction = sorttable.guessType(table,i);
+	      }
+	      // make it clickable to sort
+	      headrow[i].sorttable_columnindex = i;
+	      headrow[i].sorttable_tbody = table.tBodies[0];
+	      dean_addEvent(headrow[i],"click", sorttable.innerSortFunction = function(e) {
+
+          if (this.className.search(/\bsorttable_sorted\b/) != -1) {
+            // if we're already sorted by this column, just
+            // reverse the table, which is quicker
+            sorttable.reverse(this.sorttable_tbody);
+            this.className = this.className.replace('sorttable_sorted',
+                                                    'sorttable_sorted_reverse');
+            this.removeChild(document.getElementById('sorttable_sortfwdind'));
+            sortrevind = document.createElement('span');
+            sortrevind.id = "sorttable_sortrevind";
+            sortrevind.innerHTML = stIsIE ? '&nbsp<font face="webdings">5</font>' : '&nbsp;&#x25B4;';
+            this.appendChild(sortrevind);
+            return;
+          }
+          if (this.className.search(/\bsorttable_sorted_reverse\b/) != -1) {
+            // if we're already sorted by this column in reverse, just
+            // re-reverse the table, which is quicker
+            sorttable.reverse(this.sorttable_tbody);
+            this.className = this.className.replace('sorttable_sorted_reverse',
+                                                    'sorttable_sorted');
+            this.removeChild(document.getElementById('sorttable_sortrevind'));
+            sortfwdind = document.createElement('span');
+            sortfwdind.id = "sorttable_sortfwdind";
+            sortfwdind.innerHTML = stIsIE ? '&nbsp<font face="webdings">6</font>' : '&nbsp;&#x25BE;';
+            this.appendChild(sortfwdind);
+            return;
+          }
+
+          // remove sorttable_sorted classes
+          theadrow = this.parentNode;
+          forEach(theadrow.childNodes, function(cell) {
+            if (cell.nodeType == 1) { // an element
+              cell.className = cell.className.replace('sorttable_sorted_reverse','');
+              cell.className = cell.className.replace('sorttable_sorted','');
+            }
+          });
+          sortfwdind = document.getElementById('sorttable_sortfwdind');
+          if (sortfwdind) { sortfwdind.parentNode.removeChild(sortfwdind); }
+          sortrevind = document.getElementById('sorttable_sortrevind');
+          if (sortrevind) { sortrevind.parentNode.removeChild(sortrevind); }
+
+          this.className += ' sorttable_sorted';
+          sortfwdind = document.createElement('span');
+          sortfwdind.id = "sorttable_sortfwdind";
+          sortfwdind.innerHTML = stIsIE ? '&nbsp<font face="webdings">6</font>' : '&nbsp;&#x25BE;';
+          this.appendChild(sortfwdind);
+
+	        // build an array to sort. This is a Schwartzian transform thing,
+	        // i.e., we "decorate" each row with the actual sort key,
+	        // sort based on the sort keys, and then put the rows back in order
+	        // which is a lot faster because you only do getInnerText once per row
+	        row_array = [];
+	        col = this.sorttable_columnindex;
+	        rows = this.sorttable_tbody.rows;
+	        for (var j=0; j<rows.length; j++) {
+	          row_array[row_array.length] = [sorttable.getInnerText(rows[j].cells[col]), rows[j]];
+	        }
+	        /* If you want a stable sort, uncomment the following line */
+	        //sorttable.shaker_sort(row_array, this.sorttable_sortfunction);
+	        /* and comment out this one */
+	        row_array.sort(this.sorttable_sortfunction);
+
+	        tb = this.sorttable_tbody;
+	        for (var j=0; j<row_array.length; j++) {
+	          tb.appendChild(row_array[j][1]);
+	        }
+
+	        delete row_array;
+	      });
+	    }
+    }
+  },
+
+  guessType: function(table, column) {
+    // guess the type of a column based on its first non-blank row
+    sortfn = sorttable.sort_alpha;
+    for (var i=0; i<table.tBodies[0].rows.length; i++) {
+      text = sorttable.getInnerText(table.tBodies[0].rows[i].cells[column]);
+      if (text != '') {
+        if (text.match(/^-?[£$¤]?[\d,.]+%?$/)) {
+          return sorttable.sort_numeric;
+        }
+        // check for a date: dd/mm/yyyy or dd/mm/yy
+        // can have / or . or - as separator
+        // can be mm/dd as well
+        possdate = text.match(sorttable.DATE_RE)
+        if (possdate) {
+          // looks like a date
+          first = parseInt(possdate[1]);
+          second = parseInt(possdate[2]);
+          if (first > 12) {
+            // definitely dd/mm
+            return sorttable.sort_ddmm;
+          } else if (second > 12) {
+            return sorttable.sort_mmdd;
+          } else {
+            // looks like a date, but we can't tell which, so assume
+            // that it's dd/mm (English imperialism!) and keep looking
+            sortfn = sorttable.sort_ddmm;
+          }
+        }
+      }
+    }
+    return sortfn;
+  },
+
+  getInnerText: function(node) {
+    // gets the text we want to use for sorting for a cell.
+    // strips leading and trailing whitespace.
+    // this is *not* a generic getInnerText function; it's special to sorttable.
+    // for example, you can override the cell text with a customkey attribute.
+    // it also gets .value for <input> fields.
+
+    if (!node) return "";
+
+    hasInputs = (typeof node.getElementsByTagName == 'function') &&
+                 node.getElementsByTagName('input').length;
+
+    if (node.getAttribute("sorttable_customkey") != null) {
+      return node.getAttribute("sorttable_customkey");
+    }
+    else if (typeof node.textContent != 'undefined' && !hasInputs) {
+      return node.textContent.replace(/^\s+|\s+$/g, '');
+    }
+    else if (typeof node.innerText != 'undefined' && !hasInputs) {
+      return node.innerText.replace(/^\s+|\s+$/g, '');
+    }
+    else if (typeof node.text != 'undefined' && !hasInputs) {
+      return node.text.replace(/^\s+|\s+$/g, '');
+    }
+    else {
+      switch (node.nodeType) {
+        case 3:
+          if (node.nodeName.toLowerCase() == 'input') {
+            return node.value.replace(/^\s+|\s+$/g, '');
+          }
+        case 4:
+          return node.nodeValue.replace(/^\s+|\s+$/g, '');
+          break;
+        case 1:
+        case 11:
+          var innerText = '';
+          for (var i = 0; i < node.childNodes.length; i++) {
+            innerText += sorttable.getInnerText(node.childNodes[i]);
+          }
+          return innerText.replace(/^\s+|\s+$/g, '');
+          break;
+        default:
+          return '';
+      }
+    }
+  },
+
+  reverse: function(tbody) {
+    // reverse the rows in a tbody
+    newrows = [];
+    for (var i=0; i<tbody.rows.length; i++) {
+      newrows[newrows.length] = tbody.rows[i];
+    }
+    for (var i=newrows.length-1; i>=0; i--) {
+       tbody.appendChild(newrows[i]);
+    }
+    delete newrows;
+  },
+
+  /* sort functions
+     each sort function takes two parameters, a and b
+     you are comparing a[0] and b[0] */
+  sort_numeric: function(a,b) {
+    aa = parseFloat(a[0].replace(/[^0-9.-]/g,''));
+    if (isNaN(aa)) aa = 0;
+    bb = parseFloat(b[0].replace(/[^0-9.-]/g,''));
+    if (isNaN(bb)) bb = 0;
+    return aa-bb;
+  },
+  sort_alpha: function(a,b) {
+    if (a[0]==b[0]) return 0;
+    if (a[0]<b[0]) return -1;
+    return 1;
+  },
+  sort_ddmm: function(a,b) {
+    mtch = a[0].match(sorttable.DATE_RE);
+    y = mtch[3]; m = mtch[2]; d = mtch[1];
+    if (m.length == 1) m = '0'+m;
+    if (d.length == 1) d = '0'+d;
+    dt1 = y+m+d;
+    mtch = b[0].match(sorttable.DATE_RE);
+    y = mtch[3]; m = mtch[2]; d = mtch[1];
+    if (m.length == 1) m = '0'+m;
+    if (d.length == 1) d = '0'+d;
+    dt2 = y+m+d;
+    if (dt1==dt2) return 0;
+    if (dt1<dt2) return -1;
+    return 1;
+  },
+  sort_mmdd: function(a,b) {
+    mtch = a[0].match(sorttable.DATE_RE);
+    y = mtch[3]; d = mtch[2]; m = mtch[1];
+    if (m.length == 1) m = '0'+m;
+    if (d.length == 1) d = '0'+d;
+    dt1 = y+m+d;
+    mtch = b[0].match(sorttable.DATE_RE);
+    y = mtch[3]; d = mtch[2]; m = mtch[1];
+    if (m.length == 1) m = '0'+m;
+    if (d.length == 1) d = '0'+d;
+    dt2 = y+m+d;
+    if (dt1==dt2) return 0;
+    if (dt1<dt2) return -1;
+    return 1;
+  },
+
+  shaker_sort: function(list, comp_func) {
+    // A stable sort function to allow multi-level sorting of data
+    // see: http://en.wikipedia.org/wiki/Cocktail_sort
+    // thanks to Joseph Nahmias
+    var b = 0;
+    var t = list.length - 1;
+    var swap = true;
+
+    while(swap) {
+        swap = false;
+        for(var i = b; i < t; ++i) {
+            if ( comp_func(list[i], list[i+1]) > 0 ) {
+                var q = list[i]; list[i] = list[i+1]; list[i+1] = q;
+                swap = true;
+            }
+        } // for
+        t--;
+
+        if (!swap) break;
+
+        for(var i = t; i > b; --i) {
+            if ( comp_func(list[i], list[i-1]) < 0 ) {
+                var q = list[i]; list[i] = list[i-1]; list[i-1] = q;
+                swap = true;
+            }
+        } // for
+        b++;
+
+    } // while(swap)
+  }
+}
+
+/* ******************************************************************
+   Supporting functions: bundled here to avoid depending on a library
+   ****************************************************************** */
+
+// Dean Edwards/Matthias Miller/John Resig
+
+/* for Mozilla/Opera9 */
+if (document.addEventListener) {
+    document.addEventListener("DOMContentLoaded", sorttable.init, false);
+}
+
+/* for Internet Explorer */
+/*@cc_on @*/
+/*@if (@_win32)
+    document.write("<script id=__ie_onload defer src=javascript:void(0)><\/script>");
+    var script = document.getElementById("__ie_onload");
+    script.onreadystatechange = function() {
+        if (this.readyState == "complete") {
+            sorttable.init(); // call the onload handler
+        }
+    };
+/*@end @*/
+
+/* for Safari */
+if (/WebKit/i.test(navigator.userAgent)) { // sniff
+    var _timer = setInterval(function() {
+        if (/loaded|complete/.test(document.readyState)) {
+            sorttable.init(); // call the onload handler
+        }
+    }, 10);
+}
+
+/* for other browsers */
+window.onload = sorttable.init;
+
+// written by Dean Edwards, 2005
+// with input from Tino Zijdel, Matthias Miller, Diego Perini
+
+// http://dean.edwards.name/weblog/2005/10/add-event/
+
+function dean_addEvent(element, type, handler) {
+	if (element.addEventListener) {
+		element.addEventListener(type, handler, false);
+	} else {
+		// assign each event handler a unique ID
+		if (!handler.$$guid) handler.$$guid = dean_addEvent.guid++;
+		// create a hash table of event types for the element
+		if (!element.events) element.events = {};
+		// create a hash table of event handlers for each element/event pair
+		var handlers = element.events[type];
+		if (!handlers) {
+			handlers = element.events[type] = {};
+			// store the existing event handler (if there is one)
+			if (element["on" + type]) {
+				handlers[0] = element["on" + type];
+			}
+		}
+		// store the event handler in the hash table
+		handlers[handler.$$guid] = handler;
+		// assign a global event handler to do all the work
+		element["on" + type] = handleEvent;
+	}
+};
+// a counter used to create unique IDs
+dean_addEvent.guid = 1;
+
+function removeEvent(element, type, handler) {
+	if (element.removeEventListener) {
+		element.removeEventListener(type, handler, false);
+	} else {
+		// delete the event handler from the hash table
+		if (element.events && element.events[type]) {
+			delete element.events[type][handler.$$guid];
+		}
+	}
+};
+
+function handleEvent(event) {
+	var returnValue = true;
+	// grab the event object (IE uses a global event object)
+	event = event || fixEvent(((this.ownerDocument || this.document || this).parentWindow || window).event);
+	// get a reference to the hash table of event handlers
+	var handlers = this.events[event.type];
+	// execute each event handler
+	for (var i in handlers) {
+		this.$$handleEvent = handlers[i];
+		if (this.$$handleEvent(event) === false) {
+			returnValue = false;
+		}
+	}
+	return returnValue;
+};
+
+function fixEvent(event) {
+	// add W3C standard event methods
+	event.preventDefault = fixEvent.preventDefault;
+	event.stopPropagation = fixEvent.stopPropagation;
+	return event;
+};
+fixEvent.preventDefault = function() {
+	this.returnValue = false;
+};
+fixEvent.stopPropagation = function() {
+  this.cancelBubble = true;
+}
+
+// Dean's forEach: http://dean.edwards.name/base/forEach.js
+/*
+	forEach, version 1.0
+	Copyright 2006, Dean Edwards
+	License: http://www.opensource.org/licenses/mit-license.php
+*/
+
+// array-like enumeration
+if (!Array.forEach) { // mozilla already supports this
+	Array.forEach = function(array, block, context) {
+		for (var i = 0; i < array.length; i++) {
+			block.call(context, array[i], i, array);
+		}
+	};
+}
+
+// generic enumeration
+Function.prototype.forEach = function(object, block, context) {
+	for (var key in object) {
+		if (typeof this.prototype[key] == "undefined") {
+			block.call(context, object[key], key, object);
+		}
+	}
+};
+
+// character enumeration
+String.forEach = function(string, block, context) {
+	Array.forEach(string.split(""), function(chr, index) {
+		block.call(context, chr, index, string);
+	});
+};
+
+// globally resolve forEach enumeration
+var forEach = function(object, block, context) {
+	if (object) {
+		var resolve = Object; // default
+		if (object instanceof Function) {
+			// functions have a "length" property
+			resolve = Function;
+		} else if (object.forEach instanceof Function) {
+			// the object implements a custom forEach method so use that
+			object.forEach(block, context);
+			return;
+		} else if (typeof object == "string") {
+			// the object is a string
+			resolve = String;
+		} else if (typeof object.length == "number") {
+			// the object is array-like
+			resolve = Array;
+		}
+		resolve.forEach(object, block, context);
+	}
+};
+</script>
